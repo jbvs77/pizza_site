@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CasiPizza — Masa real fermentada 72 horas. San Miguel Petapa. Vie, Sáb y Dom.">
+  <title>CasiPizza — San Miguel Petapa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Cambia este número por tu WhatsApp (502 + número sin espacios) -->
+  <!-- data-whatsapp="502 3088-3119" -->
+
+  <header class="header">
+    <nav class="nav">
+      <a href="#" class="logo">CasiPizza</a>
+      <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links">
+        <li><a href="#historia">Nuestra masa</a></li>
+        <li><a href="#menu">Menú</a></li>
+        <li><a href="#horarios">Horarios</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <video
+        class="hero-video"
+        autoplay
+        muted
+        loop
+        playsinline
+        poster="videos/masa-hero-poster.jpg"
+      >
+        <source src="\videos\hero_home_vide_new.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content">
+        <p class="label">San Miguel Petapa · Masa real</p>
+        <h1>CasiPizza</h1>
+        <p class="hero-lead">
+          Pizza artesanal con fermentación lenta.<br>
+          Sabores unicos. Tres días de reposo.
+        </p>
+        <p class="hero-context">
+          Harina de fuerza · 72 horas en frío · Solo fines de semana
+        </p>
+      </div>
+    </section>
+
+    <section id="historia" class="section section-story">
+      <div class="container">
+        <p class="label label-light">Por qué somos distintos</p>
+        <h2>No somos masa de fábrica</h2>
+        <div class="story-grid">
+          <div class="story-media">
+            <div class="story-gallery media-gallery">
+              <!-- Cambia los path por tus tomas de amasado. Copia el bloque para agregar/quitar videos -->
+              <div class="gallery-slide is-active">
+                <video autoplay muted loop playsinline>
+                  <source src="videos/tengounacita.MOV" type="video/mp4">
+                </video>
+              </div>
+              <div class="gallery-slide">
+                <video autoplay muted loop playsinline>
+                  <source src="videos/crisis_existencia2.MOV" type="video/mp4">
+                </video>
+              </div>
+              <div class="gallery-slide">
+                <video autoplay muted loop playsinline>
+                  <source src="videos/IMG_2048.MOV" type="video/mp4">
+                </video>
+              </div>
+              <div class="gallery-slide">
+                <video autoplay muted loop playsinline>
+                  <source src="videos/IMG_2057.MOV" type="video/mp4">
+                </video>
+              </div>
+              <div class="gallery-slide">
+                <video autoplay muted loop playsinline>
+                  <source src="videos/IMG_2060.MOV" type="video/mp4">
+                </video>
+              </div>
+            </div>
+          </div>
+          <div class="story-text">
+            <p>
+              En Guatemala, pocas pizzerías apuestan por masa real: bien fermentada,
+              saludable y hecha con paciencia. La mayoría usa masa rápida — cientos
+              de unidades al día sin garantía de calidad.
+            </p>
+            <p>
+              Cada masa de CasiPizza reposa <strong>72 horas</strong> antes de hornearse.
+              Eso se nota en el sabor, la digestión y la textura.
+            </p>
+          </div>
+        </div>
+        <ul class="specs">
+          <li>
+            <span class="spec-value">Harina de fuerza</span>
+            <span class="spec-label">Receta propia</span>
+          </li>
+          <li>
+            <span class="spec-value">60%</span>
+            <span class="spec-label">Hidratación</span>
+          </li>
+          <li>
+            <span class="spec-value">0.3%</span>
+            <span class="spec-label">Levadura — solo para activar</span>
+          </li>
+          <li>
+            <span class="spec-value">72 h</span>
+            <span class="spec-label">Fermentación en frío</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="menu" class="section section-menu">
+      <div class="container">
+        <p class="label">Menú</p>
+        <h2>Sabores disponibles · </h2>
+        <p class="section-context">Precio de introducción · entrega en San Miguel Petapa</p>
+
+        <div class="menu-grid">
+          <article class="pizza-card ">
+            <div class="pizza-card-gallery media-gallery">
+              <div class="gallery-slide is-active">
+                <img
+                  src="images/laculpable.jpg"
+                  alt="Pizza La culpable de CasiPizza — pepperoni, queso y salsa de tomate especial sobre masa fermentada 72 horas"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                >
+              </div>
+             
+              <div class="gallery-slide">
+                <!-- Si prefieres un video en vez de imagen, usa este bloque -->
+                <video muted loop playsinline>
+                  <source src="videos/IMG_2059.MOV" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="pizza-card-top">
+              <h3>La culpable</h3>
+              <span class="price">Q35</span>
+            </div>
+            <p>Pepperoni, queso y salsa de tomate especial.</p>
+          </article>
+
+          <article class="pizza-card ">
+            <div class="pizza-card-gallery media-gallery">
+              <div class="gallery-slide is-active">
+                <img
+                  src="images/hawaiana.jpg"
+                  alt="Pizza Hawaiana de CasiPizza — jamón, piña y mozzarella sobre masa fermentada 72 horas"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                >
+              </div>
+              <div class="gallery-slide">
+                <!-- Si prefieres un video en vez de imagen, usa este bloque -->
+                <video muted loop playsinline>
+                  <source src="videos/IMG_2075.MOV" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="pizza-card-top">
+              <h3>Hawaiana</h3>
+              <span class="price">Q35</span>
+            </div>
+            <p>Jamón, piña, queso y salsa de tomate especial.</p>
+          </article>
+
+          <article class="pizza-card">
+            <div class="pizza-card-gallery media-gallery">
+              <div class="gallery-slide is-active">
+                <img
+                  src="images/crisis_existencial.jpg"
+                  alt="Pizza Crisis existencial de CasiPizza — salami, pepperoni, jamón, aceitunas y champiñones sobre masa fermentada 72 horas"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                >
+              </div>              
+              <div class="gallery-slide">
+                <!-- Si prefieres un video en vez de imagen, usa este bloque -->
+                <video muted loop playsinline>
+                  <source src="videos/crisis_existencia2.MOV" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="pizza-card-top">
+              <h3>Crisis existencial</h3>
+              <span class="price">Q40</span>
+            </div>
+            <p>Salami, pepperoni, jamón, aceitunas, champiñones, queso y salsa de tomate especial.</p>
+          </article>
+
+          <article class="pizza-card">
+            <div class="pizza-card-gallery media-gallery">
+              <div class="gallery-slide is-active">
+                <img
+                  src="images/tengounacita.jpg"
+                  alt="Pizza Tengo una cita de CasiPizza — salami y un toque extra de ajo sobre masa fermentada 72 horas"
+                  width="400"
+                  height="300"
+                  loading="lazy"
+                >
+              </div>              
+              <div class="gallery-slide">
+                <!-- Si prefieres un video en vez de imagen, usa este bloque -->
+                <video muted loop playsinline>
+                  <source src="videos/hero_home_vide_new.mp4" type="video/mp4">
+                </video>
+              </div>
+            </div>
+            <div class="pizza-card-top">
+              <h3>Tengo una cita</h3>
+              <span class="price">Q35</span>
+            </div>
+            <p>Salami, un toque extra de ajo, queso y salsa de tomate especial.</p>
+          </article>
+        </div>
+
+        <p class="label postre-label">Postre</p>
+        <div class="postre-card">
+          <img
+              src="\images\postre.jpg"
+              alt="Pizza Hawaiana de CasiPizza — jamón, piña y mozzarella sobre masa fermentada 72 horas"
+              class="pizza-card-image"
+              width="400"
+              height="300"
+              loading="lazy"
+            >
+          <div class="pizza-card-top">
+            <h3>Babá al ron</h3>
+            <span class="price">Q10</span>
+          </div>
+          <p>Bizcocho ligero y jugoso, emborrachado generosamente con almíbar perfumado con ron.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="horarios" class="section section-hours">
+      <div class="container">
+        <p class="label">Horarios</p>
+        <h2>Solo fin de semana</h2>
+        <p class="hours-days">Viernes · Sábado · Domingo</p>
+        <p class="hours-time">18:00 — 22:00</p>
+        <p class="section-context hours-note">
+          Cantidad limitada de masas cada semana. Entregas únicamente en San Miguel Petapa.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="logo">CasiPizza</span>
+      <p>San Miguel Petapa, Guatemala</p>
+    </div>
+  </footer>
+
+  <!-- Botón flotante WhatsApp -->
+  <a
+    href="https://wa.me/50230883119?text=Hola%2C%20quiero%20pedir%20pizza%20de%20CasiPizza"
+    class="whatsapp-float"
+    target="_blank"
+    rel="noopener"
+    aria-label="Pedir por WhatsApp"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span>Pedir</span>
+  </a>
+
+  <script src="script.js"></script>
+</body>
+</html>

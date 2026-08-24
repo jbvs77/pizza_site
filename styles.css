@@ -1,0 +1,638 @@
+/* ── Paleta CasiPizza (vino, dorado, crema — tomada del flyer) ── */
+:root {
+  --wine: #3B0F1A;
+  --wine-light: #5C1F2E;
+  --gold: #B8892E;
+  --gold-light: #E3C68C;
+  --terracotta: #C1442D;
+
+  --color-bg: #F6ECD9;
+  --color-surface: #FFFDF8;
+  --color-text: var(--wine);
+  --color-text-secondary: var(--wine-light);
+  --color-text-muted: #7A5C46;
+  --color-accent: var(--terracotta);
+  --color-accent-hover: #A83A25;
+  --color-border: rgba(59, 15, 26, 0.12);
+
+  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --space-xl: 5.5rem;
+  --max-width: 980px;
+  --radius: 12px;
+  --radius-pill: 980px;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.47059;
+  letter-spacing: -0.022em;
+  color: var(--color-text);
+  background: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  width: min(100% - 2.5rem, var(--max-width));
+  margin-inline: auto;
+}
+
+/* ── Jerarquía tipo Apple ── */
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-sm);
+}
+
+.label-light {
+  color: var(--gold-light);
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+  color: var(--color-text);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.75rem, 10vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  margin-bottom: var(--space-md);
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.section-context,
+.hero-context {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+  letter-spacing: -0.01em;
+}
+
+.hero-lead {
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--color-text-secondary);
+  margin: var(--space-md) 0 var(--space-sm);
+  max-width: 32ch;
+}
+
+/* ── Header ── */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(250, 249, 247, 0.8);
+  backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100% - 2.5rem, var(--max-width));
+  margin-inline: auto;
+  height: 52px;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--color-text-secondary);
+  transition: color 0.2s;
+}
+
+.nav-links a:hover {
+  color: var(--color-text);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: var(--color-text);
+  border-radius: 1px;
+}
+
+/* ── Hero ── */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 92svh;
+  display: flex;
+  align-items: center;
+  background: url("videos/masa-hero-poster.jpg") center/cover no-repeat;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(59, 15, 26, 0.14) 0%,
+    rgba(59, 15, 26, 0.18) 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: calc(52px + var(--space-xl)) var(--space-sm) var(--space-xl);
+  width: min(100% - 2.5rem, var(--max-width));
+  margin-inline: auto;
+}
+
+.hero .label {
+  color: var(--gold-light);
+}
+
+.hero h1 {
+  color: #fff;
+}
+
+.hero .hero-lead {
+  color: rgba(255, 255, 255, 0.92);
+}
+
+.hero .hero-context {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* ── Secciones ── */
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.section-menu {
+  background: var(--color-surface);
+}
+
+/* ── Historia ── */
+.section-story {
+  background: var(--wine);
+  color: #fff;
+}
+
+.section-story h2 {
+  color: #fff;
+}
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+  align-items: center;
+}
+
+.story-media {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.story-gallery {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.story-text p {
+  font-size: 17px;
+  color: rgba(255, 255, 255, 0.72);
+  margin-bottom: var(--space-md);
+}
+
+.story-text strong {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+/* Fila 1x4 con la información de la masa, debajo del video + texto */
+.specs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.specs li {
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.spec-value {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--gold-light);
+  margin-bottom: 0.2rem;
+}
+
+.spec-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+/* ── Menú ── */
+.section-menu .section-context {
+  margin-bottom: var(--space-lg);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: var(--space-sm);
+}
+
+.postre-label {
+  margin-top: var(--space-lg);
+  margin-bottom: var(--space-sm);
+}
+
+.postre-card {
+  display: grid;
+  grid-template-columns: 140px 1fr; /* 140px para la imagen, el resto para el texto */
+  gap: var(--space-xs) var(--space-md);
+  align-items: stretch;
+  padding: var(--space-md);
+  background: var(--gold-light);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  overflow: hidden; /* recorta la imagen a las esquinas redondeadas de la tarjeta */
+}
+
+/* Regla para controlar el tamaño de la imagen */
+.postre-card .pizza-card-image {
+  grid-row: 1 / span 2; /* Ocupa las dos filas (título y descripción) */
+  grid-column: 1;
+  width: 140px;
+  height: auto;
+  align-self: stretch; /* llena todo el alto de la tarjeta */
+  object-fit: cover;
+  margin: calc(var(--space-md) * -1) 0 calc(var(--space-md) * -1) calc(var(--space-md) * -1); /* sangra hasta arriba, abajo e izquierda */
+  border-radius: 0; /* el overflow:hidden del padre se encarga de las esquinas */
+}
+
+.postre-card .pizza-card-top {
+  grid-column: 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.postre-card p {
+  grid-column: 2;
+  font-size: 15px;
+  color: var(--wine-light);
+  margin: 0;
+}
+.pizza-card {
+  padding: var(--space-md);
+  background: var(--color-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  transition: border-color 0.2s;
+  overflow: hidden;
+}
+
+.pizza-card:hover {
+  border-color: var(--gold);
+}
+
+.pizza-card-image {
+  width: calc(100% + var(--space-md) * 2);
+  max-width: none;
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  margin: calc(var(--space-md) * -1) calc(var(--space-md) * -1) var(--space-sm);
+  display: block;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+
+/* ── Galería rotativa base (pizza-card e historia la reutilizan) ── */
+.media-gallery {
+  position: relative;
+  overflow: hidden;
+}
+
+.pizza-card-gallery {
+  width: calc(100% + var(--space-md) * 2);
+  aspect-ratio: 4 / 3;
+  margin: calc(var(--space-md) * -1) calc(var(--space-md) * -1) var(--space-sm);
+  border-radius: var(--radius) var(--radius) 0 0;
+  background: var(--wine);
+}
+
+.gallery-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.gallery-slide.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.gallery-slide img,
+.gallery-slide video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pizza-card--featured {
+  padding-top: 0;
+}
+
+.pizza-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-xs);
+}
+
+.price {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--terracotta);
+  white-space: nowrap;
+}
+
+.pizza-card p {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+}
+
+/* ── Horarios ── */
+.section-hours {
+  text-align: center;
+  background: var(--gold-light);
+}
+
+.section-hours h2 {
+  color: var(--wine);
+}
+
+.hours-days {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--wine-light);
+  margin-bottom: var(--space-xs);
+}
+
+.hours-time {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--wine);
+  margin-bottom: var(--space-md);
+}
+
+.hours-note {
+  max-width: 36ch;
+  margin-inline: auto;
+}
+
+/* ── Footer ── */
+.footer {
+  padding: var(--space-lg) 0 calc(var(--space-lg) + 72px);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+}
+
+.footer p {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+/* ── WhatsApp flotante ── */
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #25D366;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 24px rgba(59, 15, 26, 0.18);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.whatsapp-float svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 28px rgba(59, 15, 26, 0.22);
+}
+
+.whatsapp-float:active {
+  transform: scale(0.98);
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 52px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(250, 249, 247, 0.97);
+    backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-sm) 1.25rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s, opacity 0.25s;
+  }
+
+  .nav-links.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0.85rem 0;
+    font-size: 17px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: calc(52px + var(--space-lg));
+    padding-bottom: var(--space-lg);
+  }
+
+  .hero-lead {
+    max-width: none;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .specs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding: var(--space-lg) 0;
+  }
+
+  .whatsapp-float span {
+    display: none;
+  }
+
+  .whatsapp-float {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .whatsapp-float svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .specs {
+    grid-template-columns: 1fr;
+  }
+}
