@@ -15,8 +15,8 @@
   --color-accent-hover: #A83A25;
   --color-border: rgba(59, 15, 26, 0.12);
 
-  --font: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
+  --font: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
@@ -163,22 +163,48 @@ h3 {
   color: var(--color-text);
 }
 
+/* ── Ícono de Menú Interactivo (Pizza) ── */
 .nav-toggle {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
+  position: relative;
+  display: none; /* Se oculta en desktop, tu media query lo mostrará en móvil */
+  width: 32px;
+  height: 32px;
   background: none;
   border: none;
   cursor: pointer;
-  padding: 4px;
+  color: var(--color-text); /* Usa automáticamente tu color vino */
+  align-items: center;
+  justify-content: center;
+  padding: 0;
 }
 
-.nav-toggle span {
-  display: block;
-  width: 18px;
-  height: 2px;
-  background: var(--color-text);
-  border-radius: 1px;
+.nav-toggle svg {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+/* Estado inicial (Cerrado - Pizza entera) */
+.nav-toggle .icon-closed {
+  opacity: 1;
+  transform: rotate(0) scale(1);
+}
+
+.nav-toggle .icon-open {
+  opacity: 0;
+  transform: rotate(-90deg) scale(0.5);
+}
+
+/* Estado Activo (Abierto - Porción de pizza) */
+.nav-toggle[aria-expanded="true"] .icon-closed {
+  opacity: 0;
+  transform: rotate(90deg) scale(0.5);
+}
+
+.nav-toggle[aria-expanded="true"] .icon-open {
+  opacity: 1;
+  transform: rotate(0) scale(1);
 }
 
 /* ── Hero ── */
@@ -634,5 +660,125 @@ h3 {
 @media (max-width: 480px) {
   .specs {
     grid-template-columns: 1fr;
+  }
+}
+
+/* ── Llamados a la Acción (CTAs) ── */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2.25rem;
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-accent);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  /* Sombra sutil para elevar el botón del fondo */
+  box-shadow: 0 2px 8px rgba(193, 68, 45, 0.15);
+}
+
+/* Estado Hover: Elevación y cambio de color */
+.cta-button:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(193, 68, 45, 0.25);
+}
+
+/* Estado Active: Retroalimentación táctil al hacer clic */
+.cta-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(193, 68, 45, 0.15);
+}
+
+/* Variante Secundaria (Ghost Button) para "Reserva tu masa hoy" */
+.cta-button.secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-text);
+  box-shadow: none;
+}
+
+.cta-button.secondary:hover {
+  background-color: var(--color-text);
+  color: var(--color-surface);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(59, 15, 26, 0.15);
+}
+
+/* Ajuste de contraste para CTAs secundarios en fondos oscuros */
+.section-story .cta-button.secondary {
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
+.section-story .cta-button.secondary:hover {
+  background-color: var(--gold-light);
+  color: var(--wine); /* El texto pasa a oscuro para contrastar con el fondo dorado */
+  box-shadow: 0 6px 16px rgba(227, 198, 140, 0.2); /* Sombra adaptada al tono dorado */
+}
+
+/* ── TikTok flotante ── */
+.tiktok-float {
+  position: fixed;
+  bottom: 5rem; /* Separación exacta sobre el botón de WhatsApp en desktop */
+  right: 1.5rem;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #111111; /* Negro TikTok */
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 24px rgba(59, 15, 26, 0.18);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.tiktok-float svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.tiktok-float:hover {
+  transform: scale(1.04);
+  box-shadow: 0 6px 28px rgba(59, 15, 26, 0.22);
+}
+
+.tiktok-float:active {
+  transform: scale(0.98);
+}
+
+/* Ajuste móvil para TikTok (oculta el texto y lo vuelve circular) */
+@media (max-width: 768px) {
+  .tiktok-float span {
+    display: none;
+  }
+  
+  .tiktok-float {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    bottom: 5.5rem; /* Separación exacta en móvil */
+    right: 1.25rem;
+  }
+  
+  .tiktok-float svg {
+    width: 26px;
+    height: 26px;
   }
 }

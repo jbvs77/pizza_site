@@ -3,24 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="CasiPizza — Masa real fermentada 72 horas. San Miguel Petapa. Vie, Sáb y Dom.">
+  <meta name="description" content="CasiPizza — Masa real fermentada +48 horas. San Miguel Petapa. Jue, Vie, Sáb y Dom.">
   <title>CasiPizza — San Miguel Petapa</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;1,9..144,500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-  <!-- Cambia este número por tu WhatsApp (502 + número sin espacios) -->
-  <!-- data-whatsapp="502 3088-3119" -->
 
   <header class="header">
     <nav class="nav">
       <a href="#" class="logo">CasiPizza</a>
       <button class="nav-toggle" aria-label="Abrir menú" aria-expanded="false">
-        <span></span>
-        <span></span>
+        <!-- Pizza Entera (Menú cerrado) -->
+        <svg class="icon-closed" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="2" x2="12" y2="22"></line>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+          <line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line>
+          <line x1="19.07" y1="4.93" x2="4.93" y2="19.07"></line>
+        </svg>
+        <!-- Porción de Pizza de Lucide (Menú abierto) -->
+        <svg class="icon-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M15 11h.01"></path>
+          <path d="M11 15h.01"></path>
+          <path d="M16 16h.01"></path>
+          <path d="m2 16 20 6-6-20A20 20 0 0 0 2 16"></path>
+          <path d="M5.71 17.11a17.04 17.04 0 0 1 11.4-11.4"></path>
+        </svg>
       </button>
       <ul class="nav-links">
         <li><a href="#historia">Nuestra masa</a></li>
@@ -33,14 +44,7 @@
   <main>
 
     <section class="hero">
-      <video
-        class="hero-video"
-        autoplay
-        muted
-        loop
-        playsinline
-        poster="videos/masa-hero-poster.jpg"
-      >
+      <video class="hero-video" autoplay muted loop playsinline poster="videos/masa-hero-poster.jpg">
         <source src="videos/hero_home_vide_new.mp4" type="video/mp4">
       </video>
       <div class="hero-overlay"></div>
@@ -48,23 +52,24 @@
         <p class="label">San Miguel Petapa · Masa real</p>
         <h1>CasiPizza</h1>
         <p class="hero-lead">
-          Pizza artesanal con fermentación lenta.<br>
-          Sabores unicos. Tres días de reposo.
+          Pizza artesanal de verdad.<br>
+          Sabores únicos. +48 horas de fermentación.
         </p>
         <p class="hero-context">
-          Harina de fuerza · 72 horas en frío · Solo fines de semana
+          Harina de fuerza · Fermentación en frío · Solo de Jueves a Domingo
         </p>
+        <!-- CTA Principal -->
+        <a href="#menu" class="cta-button">Ver el menú</a>
       </div>
     </section>
 
     <section id="historia" class="section section-story">
       <div class="container">
         <p class="label label-light">Por qué somos distintos</p>
-        <h2>No somos masa de fábrica</h2>
+        <h2>El secreto está en el tiempo</h2>
         <div class="story-grid">
           <div class="story-media">
             <div class="story-gallery media-gallery">
-              <!-- Cambia los path por tus tomas de amasado. Copia el bloque para agregar/quitar videos -->
               <div class="gallery-slide is-active">
                 <video autoplay muted loop playsinline>
                   <source src="videos/tengounacita_mini.mp4" type="video/mp4">
@@ -80,28 +85,17 @@
                   <source src="videos/IMG_2048_mini.mp4" type="video/mp4">
                 </video>
               </div>
-              <div class="gallery-slide">
-                <video autoplay muted loop playsinline>
-                  <source src="videos/IMG_2057_mini.mp4" type="video/mp4">
-                </video>
-              </div>
-              <div class="gallery-slide">
-                <video autoplay muted loop playsinline>
-                  <source src="videos/IMG_2060_mini.mp4" type="video/mp4">
-                </video>
-              </div>
             </div>
           </div>
           <div class="story-text">
             <p>
-              En Guatemala, pocas pizzerías apuestan por masa real: bien fermentada,
-              saludable y hecha con paciencia. La mayoría usa masa rápida — cientos
-              de unidades al día sin garantía de calidad.
+              En Guatemala, pocas pizzerías apuestan por masa real. La mayoría usa masas rápidas y pesadas. Nosotros preferimos la paciencia y el sabor auténtico.
             </p>
             <p>
-              Cada masa de CasiPizza reposa <strong>72 horas</strong> antes de hornearse.
-              Eso se nota en el sabor, la digestión y la textura.
+              Nuestra masa reposa pacientemente durante <strong>más de 48 horas en frío</strong>. ¿El resultado? Una pizza con bordes crujientes, textura aireada, un sabor profundo y una digestión perfecta y ligera. No te conformes con menos.
             </p>
+            <!-- CTA Secundario -->
+            <a href="https://wa.me/50230883119?text=Hola%2C%20quiero%20probar%20la%20pizza%20de%20CasiPizza" class="cta-button secondary" target="_blank" rel="noopener">Reserva tu masa hoy</a>
           </div>
         </div>
         <ul class="specs">
@@ -118,8 +112,8 @@
             <span class="spec-label">Levadura — solo para activar</span>
           </li>
           <li>
-            <span class="spec-value">72 h</span>
-            <span class="spec-label">Fermentación en frío</span>
+            <span class="spec-value">+48 h</span>
+            <span class="spec-label">Fermentación lenta</span>
           </li>
         </ul>
       </div>
@@ -128,27 +122,15 @@
     <section id="menu" class="section section-menu">
       <div class="container">
         <p class="label">Menú</p>
-        <h2>Sabores disponibles · </h2>
-        <p class="section-context">Precio de introducción · entrega en San Miguel Petapa</p>
+        <h2>Nuestras especialidades</h2>
+        <p class="section-context">Precio de introducción · Entrega en San Miguel Petapa</p>
 
+        <!-- Pizzas -->
         <div class="menu-grid">
-          <article class="pizza-card ">
+          <article class="pizza-card">
             <div class="pizza-card-gallery media-gallery">
               <div class="gallery-slide is-active">
-                <img
-                  src="images/laculpable.jpg"
-                  alt="Pizza La culpable de CasiPizza — pepperoni, queso y salsa de tomate especial sobre masa fermentada 72 horas"
-                  width="400"
-                  height="300"
-                  loading="lazy"
-                >
-              </div>
-              
-              <div class="gallery-slide">
-                <!-- Si prefieres un video en vez de imagen, usa este bloque -->
-                <video muted loop playsinline>
-                  <source src="videos/IMG_2059_mini.mp4" type="video/mp4">
-                </video>
+                <img src="images/laculpable.jpg" alt="Pizza La culpable — fermentada +48 horas" width="400" height="300" loading="lazy">
               </div>
             </div>
             <div class="pizza-card-top">
@@ -158,22 +140,10 @@
             <p>Pepperoni, queso y salsa de tomate especial.</p>
           </article>
 
-          <article class="pizza-card ">
+          <article class="pizza-card">
             <div class="pizza-card-gallery media-gallery">
               <div class="gallery-slide is-active">
-                <img
-                  src="images/hawaiana.jpg"
-                  alt="Pizza Hawaiana de CasiPizza — jamón, piña y mozzarella sobre masa fermentada 72 horas"
-                  width="400"
-                  height="300"
-                  loading="lazy"
-                >
-              </div>
-              <div class="gallery-slide">
-                <!-- Si prefieres un video en vez de imagen, usa este bloque -->
-                <video muted loop playsinline>
-                  <source src="videos/IMG_2075_mini.mp4" type="video/mp4">
-                </video>
+                <img src="images/hawaiana.jpg" alt="Pizza Hawaiana — fermentada +48 horas" width="400" height="300" loading="lazy">
               </div>
             </div>
             <div class="pizza-card-top">
@@ -186,20 +156,8 @@
           <article class="pizza-card">
             <div class="pizza-card-gallery media-gallery">
               <div class="gallery-slide is-active">
-                <img
-                  src="images/crisis_existencial.jpg"
-                  alt="Pizza Crisis existencial de CasiPizza — salami, pepperoni, jamón, aceitunas y champiñones sobre masa fermentada 72 horas"
-                  width="400"
-                  height="300"
-                  loading="lazy"
-                >
-              </div>              
-              <div class="gallery-slide">
-                <!-- Si prefieres un video en vez de imagen, usa este bloque -->
-                <video muted loop playsinline>
-                  <source src="videos/crisis_existencia2_mini.mp4" type="video/mp4">
-                </video>
-              </div>
+                <img src="images/crisis_existencial.jpg" alt="Pizza Crisis existencial — fermentada +48 horas" width="400" height="300" loading="lazy">
+              </div> 
             </div>
             <div class="pizza-card-top">
               <h3>Crisis existencial</h3>
@@ -211,20 +169,8 @@
           <article class="pizza-card">
             <div class="pizza-card-gallery media-gallery">
               <div class="gallery-slide is-active">
-                <img
-                  src="images/tengounacita.jpg"
-                  alt="Pizza Tengo una cita de CasiPizza — salami y un toque extra de ajo sobre masa fermentada 72 horas"
-                  width="400"
-                  height="300"
-                  loading="lazy"
-                >
-              </div>              
-              <div class="gallery-slide">
-                <!-- Si prefieres un video en vez de imagen, usa este bloque -->
-                <video muted loop playsinline>
-                  <source src="videos/hero_home_vide_new.mp4" type="video/mp4">
-                </video>
-              </div>
+                <img src="images/tengounacita.jpg" alt="Pizza Tengo una cita — fermentada +48 horas" width="400" height="300" loading="lazy">
+              </div> 
             </div>
             <div class="pizza-card-top">
               <h3>Tengo una cita</h3>
@@ -234,34 +180,51 @@
           </article>
         </div>
 
-        <p class="label postre-label">Postre</p>
-        <div class="postre-card">
-          <img
-              src="images/postre.jpg"
-              alt="Babá al ron de CasiPizza"
-              class="pizza-card-image"
-              width="400"
-              height="300"
-              loading="lazy"
-            >
-          <div class="pizza-card-top">
-            <h3>Babá al ron</h3>
-            <span class="price">Q10</span>
-          </div>
-          <p>Bizcocho ligero y jugoso, emborrachado generosamente con almíbar perfumado con ron.</p>
+        
+        <!-- Postres -->
+        <h2 class="postre-label">Postres</h2>
+        <div class="menu-grid">
+          
+          <article class="postre-card">
+            <!-- La imagen ahora es un hijo directo sin contenedores extra -->
+            <img src="images/postre.jpg" alt="Babá al ron de CasiPizza" class="pizza-card-image" width="400" height="300" loading="lazy">
+            <div class="pizza-card-top">
+              <h3>Babá al ron</h3>
+              <span class="price">Q10</span>
+            </div>
+            <p>Bizcocho ligero y jugoso, emborrachado generosamente con almíbar perfumado con ron.</p>
+          </article>
+
+          <article class="postre-card">
+            <img src="images/chocoflan.jpg" alt="Choco flan de CasiPizza" class="pizza-card-image" width="400" height="300" loading="lazy">
+            <div class="pizza-card-top">
+              <h3>Choco flan</h3>
+              <span class="price">Q10</span>
+            </div>
+            <p>Combina dos capas distintas en un solo bocado, una base rica de pastel de chocolate denso y una capa superior de flan de vainilla suave y cremoso, bañada en caramelo líquido.</p>
+          </article>
+
         </div>
+        
+        <!-- CTA Final del Menú -->
+        <div style="text-align: center; margin-top: 3rem;">
+          <a href="https://wa.me/50230883119?text=Hola%2C%20quiero%20hacer%20un%20pedido" class="cta-button" target="_blank" rel="noopener">Haz tu pedido por WhatsApp</a>
+        </div>
+
       </div>
     </section>
 
     <section id="horarios" class="section section-hours">
       <div class="container">
         <p class="label">Horarios</p>
-        <h2>Solo fin de semana</h2>
-        <p class="hours-days">Viernes · Sábado · Domingo</p>
-        <p class="hours-time">18:00 — 22:00</p>
+        <h2>Solo de Jueves a Domingo</h2>
+        <p class="hours-days">Jueves · Viernes · Sábado · Domingo</p>
+        <p class="hours-time">17:00 — 21:00</p>
         <p class="section-context hours-note">
-          Cantidad limitada de masas cada semana. Entregas únicamente en San Miguel Petapa.
+          Tenemos una cantidad limitada de masas cada semana para garantizar su calidad.<br>Entregas únicamente en San Miguel Petapa.
         </p>
+        <br>
+        <a href="https://wa.me/50230883119?text=Hola%2C%20quiero%20hacer%20un%20pedido" class="cta-button" target="_blank" rel="noopener">Asegura tu pizza</a>
       </div>
     </section>
 
@@ -274,14 +237,14 @@
     </div>
   </footer>
 
-  <!-- Botón flotante WhatsApp -->
-  <a
-    href="https://wa.me/50230883119?text=Hola%2C%20quiero%20pedir%20pizza%20de%20CasiPizza"
-    class="whatsapp-float"
-    target="_blank"
-    rel="noopener"
-    aria-label="Pedir por WhatsApp"
-  >
+  <!-- Botón flotante TikTok -->
+  <a href="https://www.tiktok.com/@casipizza?_r=1&_t=ZS-99SU2UQXEQv" class="tiktok-float" target="_blank" rel="noopener" aria-label="Síguenos en TikTok">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+    </svg>
+    <span>TikTok</span>
+  </a>
+  <a href="https://wa.me/50230883119?text=Hola%2C%20quiero%20pedir%20pizza%20de%20CasiPizza" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Pedir por WhatsApp">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
     </svg>
