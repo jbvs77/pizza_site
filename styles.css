@@ -1,4 +1,6 @@
-/* ── Paleta CasiPizza (vino, dorado, crema — tomada del flyer) ── */
+/* ==========================================================================
+   1. VARIABLES & DESIGN SYSTEM (Paleta CasiPizza)
+   ========================================================================== */
 :root {
   --wine: #3B0F1A;
   --wine-light: #5C1F2E;
@@ -28,6 +30,9 @@
   --radius-pill: 980px;
 }
 
+/* ==========================================================================
+   2. RESET & BASE STYLES
+   ========================================================================== */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -42,11 +47,12 @@ body {
   font-family: var(--font);
   font-size: 17px;
   font-weight: 400;
-  line-height: 1.47059;
-  letter-spacing: -0.022em;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
   color: var(--color-text);
-  background: var(--color-bg);
+  background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 a {
@@ -58,19 +64,31 @@ ul {
   list-style: none;
 }
 
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+address {
+  font-style: normal;
+}
+
 .container {
   width: min(100% - 2.5rem, var(--max-width));
   margin-inline: auto;
 }
 
-/* ── Jerarquía tipo Apple ── */
+/* ==========================================================================
+   3. TYPOGRAPHY & HEADINGS (Jerarquía Premium)
+   ========================================================================== */
 .label {
   font-size: 12px;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-xs);
 }
 
 .label-light {
@@ -80,7 +98,7 @@ ul {
 h1, h2, h3 {
   font-weight: 700;
   letter-spacing: -0.03em;
-  line-height: 1.08;
+  line-height: 1.1;
   color: var(--color-text);
 }
 
@@ -88,12 +106,12 @@ h1 {
   font-family: var(--font-display);
   font-style: italic;
   font-weight: 600;
-  font-size: clamp(2.75rem, 10vw, 4.5rem);
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
 }
 
 h2 {
-  font-size: clamp(2rem, 5vw, 2.75rem);
-  margin-bottom: var(--space-md);
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: var(--space-sm);
 }
 
 h3 {
@@ -106,27 +124,29 @@ h3 {
   font-size: 15px;
   font-weight: 400;
   color: var(--color-text-muted);
-  letter-spacing: -0.01em;
 }
 
 .hero-lead {
   font-size: clamp(1.15rem, 2.5vw, 1.45rem);
   font-weight: 400;
   line-height: 1.4;
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.92);
   margin: var(--space-md) 0 var(--space-sm);
-  max-width: 32ch;
+  max-width: 34ch;
 }
 
-/* ── Header ── */
+/* ==========================================================================
+   4. NAVIGATION HEADER
+   ========================================================================== */
 .header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   z-index: 100;
-  background: rgba(250, 249, 247, 0.8);
+  background: rgba(250, 249, 247, 0.85);
   backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
   border-bottom: 1px solid var(--color-border);
 }
 
@@ -137,13 +157,15 @@ h3 {
   width: min(100% - 2.5rem, var(--max-width));
   margin-inline: auto;
   height: 52px;
+  gap: 1rem;
 }
 
 .logo {
   font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 600;
+  font-size: 1.35rem;
+  font-weight: 700;
   letter-spacing: -0.01em;
+  color: var(--wine);
 }
 
 .nav-links {
@@ -154,28 +176,26 @@ h3 {
 
 .nav-links a {
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--color-text-secondary);
-  transition: color 0.2s;
+  transition: color 0.2s ease;
 }
 
 .nav-links a:hover {
-  color: var(--color-text);
+  color: var(--terracotta);
 }
 
-/* ── Ícono de Menú Interactivo (Pizza) ── */
 .nav-toggle {
+  display: none;
   position: relative;
-  display: none; /* Se oculta en desktop, tu media query lo mostrará en móvil */
   width: 32px;
   height: 32px;
   background: none;
   border: none;
   cursor: pointer;
-  color: var(--color-text); /* Usa automáticamente tu color vino */
+  color: var(--color-text);
   align-items: center;
   justify-content: center;
-  padding: 0;
 }
 
 .nav-toggle svg {
@@ -185,42 +205,81 @@ h3 {
   transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
 }
 
-/* Estado inicial (Cerrado - Pizza entera) */
-.nav-toggle .icon-closed {
-  opacity: 1;
-  transform: rotate(0) scale(1);
+.nav-toggle .icon-closed { opacity: 1; transform: rotate(0) scale(1); }
+.nav-toggle .icon-open { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+
+.nav-toggle[aria-expanded="true"] .icon-closed { opacity: 0; transform: rotate(90deg) scale(0.5); }
+.nav-toggle[aria-expanded="true"] .icon-open { opacity: 1; transform: rotate(0) scale(1); }
+
+/* ==========================================================================
+   5. BADGE LIVE / ESTADO EN VIVO
+   ========================================================================== */
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(59, 15, 26, 0.06);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  width: fit-content;
 }
 
-.nav-toggle .icon-open {
-  opacity: 0;
-  transform: rotate(-90deg) scale(0.5);
+.live-badge--sm {
+  padding: 0.25rem 0.65rem;
 }
 
-/* Estado Activo (Abierto - Porción de pizza) */
-.nav-toggle[aria-expanded="true"] .icon-closed {
-  opacity: 0;
-  transform: rotate(90deg) scale(0.5);
+.live-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--wine);
 }
 
-.nav-toggle[aria-expanded="true"] .icon-open {
-  opacity: 1;
-  transform: rotate(0) scale(1);
+.live-dot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  background-color: #25D366;
+  border-radius: 50%;
+  flex-shrink: 0;
 }
 
-/* ── Hero ── */
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background-color: #25D366;
+  opacity: 0.75;
+  animation: livePulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes livePulse {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  70%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+.live-badge.is-closed .live-dot {
+  background-color: var(--terracotta);
+}
+
+.live-badge.is-closed .live-dot::after {
+  animation: none;
+  display: none;
+}
+
+/* ==========================================================================
+   6. HERO SECTION
+   ========================================================================== */
 .hero {
   position: relative;
   overflow: hidden;
   min-height: 92svh;
   display: flex;
   align-items: center;
-  background: url("videos/masa-hero-poster.jpg") center/cover no-repeat;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-video {
-    display: none;
-  }
+  background: var(--wine) url("videos/masa-hero-poster.jpg") center/cover no-repeat;
 }
 
 .hero-video {
@@ -235,11 +294,7 @@ h3 {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    180deg,
-    rgba(59, 15, 26, 0.14) 0%,
-    rgba(59, 15, 26, 0.18) 100%
-  );
+  background: linear-gradient(180deg, rgba(35, 8, 14, 0.4) 0%, rgba(35, 8, 14, 0.75) 100%);
   z-index: 1;
 }
 
@@ -251,40 +306,46 @@ h3 {
   margin-inline: auto;
 }
 
-.hero .label {
-  color: var(--gold-light);
+.hero .label { color: var(--gold-light); }
+.hero h1 { color: #FFFFFF; }
+.hero .hero-context { color: rgba(255, 255, 255, 0.7); }
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.75rem;
 }
 
-.hero h1 {
-  color: #fff;
+.hero .cta-button.secondary {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.hero .hero-lead {
-  color: rgba(255, 255, 255, 0.92);
+.hero .cta-button.secondary:hover {
+  background-color: #FFFFFF;
+  color: var(--wine);
+  border-color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.3);
 }
 
-.hero .hero-context {
-  color: rgba(255, 255, 255, 0.65);
-}
-
-/* ── Secciones ── */
+/* ==========================================================================
+   7. SECTIONS COMMON & STORY SECTION
+   ========================================================================== */
 .section {
   padding: var(--space-xl) 0;
 }
 
-.section-menu {
-  background: var(--color-surface);
-}
-
-/* ── Historia ── */
 .section-story {
-  background: var(--wine);
-  color: #fff;
+  background-color: var(--wine);
+  color: #FFFFFF;
 }
 
-.section-story h2 {
-  color: #fff;
-}
+.section-story h2 { color: #FFFFFF; }
 
 .story-grid {
   display: grid;
@@ -297,8 +358,8 @@ h3 {
 .story-media {
   border-radius: var(--radius);
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .story-gallery {
@@ -308,7 +369,8 @@ h3 {
 
 .story-text p {
   font-size: 17px;
-  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
   margin-bottom: var(--space-md);
 }
 
@@ -317,7 +379,6 @@ h3 {
   font-weight: 600;
 }
 
-/* Fila 1x4 con la información de la masa, debajo del video + texto */
 .specs {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -327,7 +388,7 @@ h3 {
 
 .specs li {
   padding: var(--space-md);
-  background: rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.05);
   border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -343,90 +404,41 @@ h3 {
 
 .spec-label {
   font-size: 13px;
-  color: rgba(255, 255, 255, 0.55);
+  color: rgba(255, 255, 255, 0.6);
 }
 
-/* ── Menú ── */
+/* ==========================================================================
+   8. MENU SECTION & CARDS
+   ========================================================================== */
+.section-menu {
+  background-color: var(--color-surface);
+}
+
 .section-menu .section-context {
   margin-bottom: var(--space-lg);
 }
 
 .menu-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: var(--space-sm);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
 }
 
-.postre-label {
-  margin-top: var(--space-lg);
-  margin-bottom: var(--space-sm);
-}
-
-.postre-card {
-  display: grid;
-  grid-template-columns: 140px 1fr; /* 140px para la imagen, el resto para el texto */
-  gap: var(--space-xs) var(--space-md);
-  align-items: stretch;
-  padding: var(--space-md);
-  background: var(--gold-light);
-  border-radius: var(--radius);
-  border: 1px solid var(--color-border);
-  overflow: hidden; /* recorta la imagen a las esquinas redondeadas de la tarjeta */
-}
-
-/* Regla para controlar el tamaño de la imagen */
-.postre-card .pizza-card-image {
-  grid-row: 1 / span 2; /* Ocupa las dos filas (título y descripción) */
-  grid-column: 1;
-  width: 140px;
-  height: auto;
-  align-self: stretch; /* llena todo el alto de la tarjeta */
-  object-fit: cover;
-  margin: calc(var(--space-md) * -1) 0 calc(var(--space-md) * -1) calc(var(--space-md) * -1); /* sangra hasta arriba, abajo e izquierda */
-  border-radius: 0; /* el overflow:hidden del padre se encarga de las esquinas */
-}
-
-.postre-card .pizza-card-top {
-  grid-column: 2;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.postre-card p {
-  grid-column: 2;
-  font-size: 15px;
-  color: var(--wine-light);
-  margin: 0;
-}
 .pizza-card {
+  display: flex;
+  flex-direction: column;
   padding: var(--space-md);
-  background: var(--color-bg);
+  background-color: var(--color-bg);
   border-radius: var(--radius);
   border: 1px solid var(--color-border);
-  transition: border-color 0.2s;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
   overflow: hidden;
 }
 
 .pizza-card:hover {
   border-color: var(--gold);
-}
-
-.pizza-card-image {
-  width: calc(100% + var(--space-md) * 2);
-  max-width: none;
-  height: auto;
-  aspect-ratio: 4 / 3;
-  object-fit: cover;
-  margin: calc(var(--space-md) * -1) calc(var(--space-md) * -1) var(--space-sm);
-  display: block;
-  border-radius: var(--radius) var(--radius) 0 0;
-}
-
-/* ── Galería rotativa base (pizza-card e historia la reutilizan) ── */
-.media-gallery {
-  position: relative;
-  overflow: hidden;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 15, 26, 0.08);
 }
 
 .pizza-card-gallery {
@@ -434,7 +446,12 @@ h3 {
   aspect-ratio: 4 / 3;
   margin: calc(var(--space-md) * -1) calc(var(--space-md) * -1) var(--space-sm);
   border-radius: var(--radius) var(--radius) 0 0;
-  background: var(--wine);
+  background-color: var(--wine);
+}
+
+.media-gallery {
+  position: relative;
+  overflow: hidden;
 }
 
 .gallery-slide {
@@ -451,28 +468,22 @@ h3 {
 
 .gallery-slide img,
 .gallery-slide video {
-  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.pizza-card--featured {
-  padding-top: 0;
 }
 
 .pizza-card-top {
   display: flex;
   align-items: flex-start;
   justify-content: space-between;
-  gap: var(--space-sm);
+  gap: var(--space-xs);
   margin-bottom: var(--space-xs);
 }
 
 .price {
-  font-size: 1.125rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  letter-spacing: -0.02em;
   color: var(--terracotta);
   white-space: nowrap;
 }
@@ -481,58 +492,218 @@ h3 {
   font-size: 15px;
   color: var(--color-text-muted);
   line-height: 1.45;
+  margin-bottom: var(--space-sm);
 }
 
-/* ── Horarios ── */
+.card-cta-button {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--terracotta);
+  transition: color 0.2s ease;
+}
+
+.card-cta-button:hover {
+  color: var(--color-accent-hover);
+}
+
+/* ==========================================================================
+   8.1 POSTRES CARD (Fix de Imagen Sangrada + Hover)
+   ========================================================================== */
+.postre-label {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+.postre-card {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: stretch;
+  padding: 0;
+  background-color: var(--gold-light);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.postre-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 15, 26, 0.12);
+}
+
+.postre-card .pizza-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+  border-radius: 0;
+}
+
+.postre-card-content {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+  height: 100%;
+}
+
+.postre-card .pizza-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.postre-card p {
+  font-size: 14px;
+  color: var(--wine-light);
+  line-height: 1.45;
+  margin-bottom: var(--space-sm);
+}
+
+.postre-card .card-cta-button {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  color: var(--wine);
+  font-weight: 700;
+}
+
+.postre-card .card-cta-button:hover {
+  color: var(--terracotta);
+}
+
+.menu-footer-cta {
+  text-align: center;
+  margin-top: var(--space-xl);
+}
+
+/* ==========================================================================
+   9. HOURS & FOOTER
+   ========================================================================== */
 .section-hours {
   text-align: center;
-  background: var(--gold-light);
+  background-color: var(--gold-light);
 }
 
-.section-hours h2 {
-  color: var(--wine);
-}
+.section-hours h2 { color: var(--wine); }
 
 .hours-days {
   font-size: clamp(1.25rem, 3vw, 1.5rem);
   font-weight: 600;
-  letter-spacing: -0.02em;
   color: var(--wine-light);
   margin-bottom: var(--space-xs);
 }
 
 .hours-time {
   font-size: 1.125rem;
-  font-weight: 500;
+  font-weight: 600;
   color: var(--wine);
   margin-bottom: var(--space-md);
 }
 
 .hours-note {
-  max-width: 36ch;
+  max-width: 40ch;
   margin-inline: auto;
+  margin-bottom: var(--space-md);
 }
 
-/* ── Footer ── */
 .footer {
-  padding: var(--space-lg) 0 calc(var(--space-lg) + 72px);
+  padding: var(--space-lg) 0 calc(var(--space-lg) + 60px);
   border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg);
 }
 
 .footer-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.5rem;
   text-align: center;
 }
 
-.footer p {
+.footer address {
   font-size: 14px;
   color: var(--color-text-muted);
 }
 
-/* ── WhatsApp flotante ── */
+.footer-tiktok-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.footer-tiktok-link:hover {
+  color: var(--terracotta);
+}
+
+/* ==========================================================================
+   10. BUTTONS & FLOATING ACTION BUTTONS (CTAs)
+   ========================================================================== */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2.25rem;
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-accent);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(193, 68, 45, 0.15);
+}
+
+.cta-button:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(193, 68, 45, 0.25);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+.cta-button.secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-text);
+  box-shadow: none;
+}
+
+.cta-button.secondary:hover {
+  background-color: var(--color-text);
+  color: var(--color-surface);
+}
+
+.section-story .cta-button.secondary {
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
+.section-story .cta-button.secondary:hover {
+  background-color: var(--gold-light);
+  color: var(--wine);
+  box-shadow: 0 6px 16px rgba(227, 198, 140, 0.2);
+}
+
+/* WhatsApp Floating Button */
 .whatsapp-float {
   position: fixed;
   bottom: 1.5rem;
@@ -543,13 +714,12 @@ h3 {
   gap: 0.5rem;
   padding: 0.75rem 1.25rem;
   background: #25D366;
-  color: #fff;
+  color: #FFFFFF;
   font-size: 15px;
   font-weight: 600;
-  letter-spacing: -0.01em;
   border-radius: var(--radius-pill);
-  box-shadow: 0 4px 24px rgba(59, 15, 26, 0.18);
-  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .whatsapp-float svg {
@@ -559,15 +729,13 @@ h3 {
 }
 
 .whatsapp-float:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 28px rgba(59, 15, 26, 0.22);
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
 }
 
-.whatsapp-float:active {
-  transform: scale(0.98);
-}
-
-/* ── Responsive ── */
+/* ==========================================================================
+   11. MEDIA QUERIES & RESPONSIVE DESIGN
+   ========================================================================== */
 @media (max-width: 768px) {
   body {
     font-size: 16px;
@@ -585,14 +753,15 @@ h3 {
     flex-direction: column;
     align-items: stretch;
     gap: 0;
-    background: rgba(250, 249, 247, 0.97);
+    background: rgba(250, 249, 247, 0.98);
     backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
     border-bottom: 1px solid var(--color-border);
     padding: var(--space-sm) 1.25rem;
     transform: translateY(-120%);
     opacity: 0;
     pointer-events: none;
-    transition: transform 0.25s, opacity 0.25s;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
   .nav-links.is-open {
@@ -633,8 +802,12 @@ h3 {
     grid-template-columns: 1fr;
   }
 
-  .section {
-    padding: var(--space-lg) 0;
+  .postre-card {
+    grid-template-columns: 110px 1fr;
+  }
+
+  .postre-card .pizza-card-image {
+    width: 110px;
   }
 
   .whatsapp-float span {
@@ -661,124 +834,24 @@ h3 {
   .specs {
     grid-template-columns: 1fr;
   }
+
+  .postre-card {
+    grid-template-columns: 1fr;
+  }
+
+  .postre-card .pizza-card-image {
+    width: 100%;
+    height: 180px;
+  }
 }
 
-/* ── Llamados a la Acción (CTAs) ── */
-.cta-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.85rem 2.25rem;
-  background-color: var(--color-accent);
-  color: #FFFFFF;
-  font-size: 16px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  border-radius: var(--radius-pill);
-  border: 1.5px solid var(--color-accent);
-  transition: all 0.25s ease;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  /* Sombra sutil para elevar el botón del fondo */
-  box-shadow: 0 2px 8px rgba(193, 68, 45, 0.15);
-}
-
-/* Estado Hover: Elevación y cambio de color */
-.cta-button:hover {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  color: #FFFFFF;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(193, 68, 45, 0.25);
-}
-
-/* Estado Active: Retroalimentación táctil al hacer clic */
-.cta-button:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 4px rgba(193, 68, 45, 0.15);
-}
-
-/* Variante Secundaria (Ghost Button) para "Reserva tu masa hoy" */
-.cta-button.secondary {
-  background-color: transparent;
-  color: var(--color-text);
-  border-color: var(--color-text);
-  box-shadow: none;
-}
-
-.cta-button.secondary:hover {
-  background-color: var(--color-text);
-  color: var(--color-surface);
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(59, 15, 26, 0.15);
-}
-
-/* Ajuste de contraste para CTAs secundarios en fondos oscuros */
-.section-story .cta-button.secondary {
-  color: var(--gold-light);
-  border-color: var(--gold-light);
-}
-
-.section-story .cta-button.secondary:hover {
-  background-color: var(--gold-light);
-  color: var(--wine); /* El texto pasa a oscuro para contrastar con el fondo dorado */
-  box-shadow: 0 6px 16px rgba(227, 198, 140, 0.2); /* Sombra adaptada al tono dorado */
-}
-
-/* ── TikTok flotante ── */
-.tiktok-float {
-  position: fixed;
-  bottom: 5rem; /* Separación exacta sobre el botón de WhatsApp en desktop */
-  right: 1.5rem;
-  z-index: 200;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.25rem;
-  background: #111111; /* Negro TikTok */
-  color: #fff;
-  font-size: 15px;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  border-radius: var(--radius-pill);
-  box-shadow: 0 4px 24px rgba(59, 15, 26, 0.18);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.tiktok-float svg {
-  width: 22px;
-  height: 22px;
-  flex-shrink: 0;
-}
-
-.tiktok-float:hover {
-  transform: scale(1.04);
-  box-shadow: 0 6px 28px rgba(59, 15, 26, 0.22);
-}
-
-.tiktok-float:active {
-  transform: scale(0.98);
-}
-
-/* Ajuste móvil para TikTok (oculta el texto y lo vuelve circular) */
-@media (max-width: 768px) {
-  .tiktok-float span {
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
     display: none;
   }
-  
-  .tiktok-float {
-    width: 56px;
-    height: 56px;
-    padding: 0;
-    justify-content: center;
-    border-radius: 50%;
-    bottom: 5.5rem; /* Separación exacta en móvil */
-    right: 1.25rem;
-  }
-  
-  .tiktok-float svg {
-    width: 26px;
-    height: 26px;
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }
