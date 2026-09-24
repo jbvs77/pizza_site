@@ -1,4 +1,32 @@
-.vercel
+# Carpetas de construcción y cache (¡Muy importante!)
+.next/
+node_modules/
+.vercel/
+
+# Configuración del editor e IDEs
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Archivos de entorno / Claves privadas (Si llegas a usar .env)
+.env
+.env*.local
+
+# Videos o archivos pesados que no necesites en el repo
 *.mov
 *.MOV
-node_modules/
+*.mp4
+
+# Archivos de registro / Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db

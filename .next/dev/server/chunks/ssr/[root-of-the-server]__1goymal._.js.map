@@ -1,6 +1,0 @@
-{
-  "version": 3,
-  "sources": [],
-  "sections": [
-    {"offset": {"line": 10, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/Luis/Desktop/casiPizza2/src/app/page.tsx"],"sourcesContent":["import Header from '@/components/Header';\r\nimport Hero from '@/components/Hero';\r\nimport StorySection from '@/components/StorySection';\r\nimport MenuSection from '@/components/MenuSection';\r\nimport HoursFooter from '@/components/HoursFooter';\r\nimport WhatsAppFloat from '@/components/WhatsAppFloat';\r\n\r\nexport default function HomePage() {\r\n  return (\r\n    <>\r\n      <Header isOpen={true} />\r\n      <main>\r\n        <Hero />\r\n        <StorySection />\r\n        <MenuSection />\r\n      </main>\r\n      <HoursFooter />\r\n      <WhatsAppFloat />\r\n    </>\r\n  );\r\n}"],"names":["HomePage","Header","isOpen","Hero","StorySection","MenuSection","HoursFooter","WhatsAppFloat"],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAOe,SAASA;IACtB,qBACE;;0BACE,8OAACC;gBAAOC,QAAQ;;;;;;0BAChB,8OAAC;;kCACC,8OAACC;;;;;kCACD,8OAACC;;;;;kCACD,8OAACC;;;;;;;;;;;0BAEH,8OAACC;;;;;0BACD,8OAACC;;;;;;;;;;;AAGP"}}]
-}
