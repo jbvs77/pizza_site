@@ -1,0 +1,857 @@
+/* ==========================================================================
+   1. VARIABLES & DESIGN SYSTEM (Paleta CasiPizza)
+   ========================================================================== */
+:root {
+  --wine: #3B0F1A;
+  --wine-light: #5C1F2E;
+  --gold: #B8892E;
+  --gold-light: #E3C68C;
+  --terracotta: #C1442D;
+
+  --color-bg: #F6ECD9;
+  --color-surface: #FFFDF8;
+  --color-text: var(--wine);
+  --color-text-secondary: var(--wine-light);
+  --color-text-muted: #7A5C46;
+  --color-accent: var(--terracotta);
+  --color-accent-hover: #A83A25;
+  --color-border: rgba(59, 15, 26, 0.12);
+
+  --font: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+
+  --space-xs: 0.5rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 3rem;
+  --space-xl: 5.5rem;
+  --max-width: 980px;
+  --radius: 12px;
+  --radius-pill: 980px;
+}
+
+/* ==========================================================================
+   2. RESET & BASE STYLES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+address {
+  font-style: normal;
+}
+
+.container {
+  width: min(100% - 2.5rem, var(--max-width));
+  margin-inline: auto;
+}
+
+/* ==========================================================================
+   3. TYPOGRAPHY & HEADINGS (Jerarquía Premium)
+   ========================================================================== */
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: var(--space-xs);
+}
+
+.label-light {
+  color: var(--gold-light);
+}
+
+h1, h2, h3 {
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.75rem, 8vw, 4.5rem);
+}
+
+h2 {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  margin-bottom: var(--space-sm);
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.section-context,
+.hero-context {
+  font-size: 15px;
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.hero-lead {
+  font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.92);
+  margin: var(--space-md) 0 var(--space-sm);
+  max-width: 34ch;
+}
+
+/* ==========================================================================
+   4. NAVIGATION HEADER
+   ========================================================================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(250, 249, 247, 0.85);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(100% - 2.5rem, var(--max-width));
+  margin-inline: auto;
+  height: 52px;
+  gap: 1rem;
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--wine);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-links a {
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.nav-links a:hover {
+  color: var(--terracotta);
+}
+
+.nav-toggle {
+  display: none;
+  position: relative;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text);
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-toggle svg {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+}
+
+.nav-toggle .icon-closed { opacity: 1; transform: rotate(0) scale(1); }
+.nav-toggle .icon-open { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+
+.nav-toggle[aria-expanded="true"] .icon-closed { opacity: 0; transform: rotate(90deg) scale(0.5); }
+.nav-toggle[aria-expanded="true"] .icon-open { opacity: 1; transform: rotate(0) scale(1); }
+
+/* ==========================================================================
+   5. BADGE LIVE / ESTADO EN VIVO
+   ========================================================================== */
+.live-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(59, 15, 26, 0.06);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  width: fit-content;
+}
+
+.live-badge--sm {
+  padding: 0.25rem 0.65rem;
+}
+
+.live-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--wine);
+}
+
+.live-dot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  background-color: #25D366;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.live-dot::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background-color: #25D366;
+  opacity: 0.75;
+  animation: livePulse 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+@keyframes livePulse {
+  0% { transform: scale(0.8); opacity: 0.8; }
+  70%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+.live-badge.is-closed .live-dot {
+  background-color: var(--terracotta);
+}
+
+.live-badge.is-closed .live-dot::after {
+  animation: none;
+  display: none;
+}
+
+/* ==========================================================================
+   6. HERO SECTION
+   ========================================================================== */
+.hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 92svh;
+  display: flex;
+  align-items: center;
+  background: var(--wine) url("/images/masa-hero-poster.jpg") center/cover no-repeat;
+}
+
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(35, 8, 14, 0.4) 0%, rgba(35, 8, 14, 0.75) 100%);
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: calc(52px + var(--space-xl)) var(--space-sm) var(--space-xl);
+  width: min(100% - 2.5rem, var(--max-width));
+  margin-inline: auto;
+}
+
+.hero .label { color: var(--gold-light); }
+.hero h1 { color: #FFFFFF; }
+.hero .hero-context { color: rgba(255, 255, 255, 0.7); }
+
+.hero-actions {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.75rem;
+}
+
+.hero .cta-button.secondary {
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.75);
+  background-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.hero .cta-button.secondary:hover {
+  background-color: #FFFFFF;
+  color: var(--wine);
+  border-color: #FFFFFF;
+  box-shadow: 0 6px 16px rgba(255, 255, 255, 0.3);
+}
+
+/* ==========================================================================
+   7. SECTIONS COMMON & STORY SECTION
+   ========================================================================== */
+.section {
+  padding: var(--space-xl) 0;
+}
+
+.section-story {
+  background-color: var(--wine);
+  color: #FFFFFF;
+}
+
+.section-story h2 { color: #FFFFFF; }
+
+.story-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-lg);
+  margin-top: var(--space-md);
+  align-items: center;
+}
+
+.story-media {
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.story-gallery {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.story-text p {
+  font-size: 17px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.8);
+  margin-bottom: var(--space-md);
+}
+
+.story-text strong {
+  color: var(--gold-light);
+  font-weight: 600;
+}
+
+.specs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-sm);
+  margin-top: var(--space-lg);
+}
+
+.specs li {
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.spec-value {
+  display: block;
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--gold-light);
+  margin-bottom: 0.2rem;
+}
+
+.spec-label {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* ==========================================================================
+   8. MENU SECTION & CARDS
+   ========================================================================== */
+.section-menu {
+  background-color: var(--color-surface);
+}
+
+.section-menu .section-context {
+  margin-bottom: var(--space-lg);
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--space-md);
+}
+
+.pizza-card {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+  background-color: var(--color-bg);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+  overflow: hidden;
+}
+
+.pizza-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 15, 26, 0.08);
+}
+
+.pizza-card-gallery {
+  width: calc(100% + var(--space-md) * 2);
+  aspect-ratio: 4 / 3;
+  margin: calc(var(--space-md) * -1) calc(var(--space-md) * -1) var(--space-sm);
+  border-radius: var(--radius) var(--radius) 0 0;
+  background-color: var(--wine);
+}
+
+.media-gallery {
+  position: relative;
+  overflow: hidden;
+}
+
+.gallery-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.gallery-slide.is-active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.gallery-slide img,
+.gallery-slide video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pizza-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--terracotta);
+  white-space: nowrap;
+}
+
+.pizza-card p {
+  font-size: 15px;
+  color: var(--color-text-muted);
+  line-height: 1.45;
+  margin-bottom: var(--space-sm);
+}
+
+.card-cta-button {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--terracotta);
+  transition: color 0.2s ease;
+}
+
+.card-cta-button:hover {
+  color: var(--color-accent-hover);
+}
+
+/* ==========================================================================
+   8.1 POSTRES CARD (Fix de Imagen Sangrada + Hover)
+   ========================================================================== */
+.postre-label {
+  margin-top: var(--space-xl);
+  margin-bottom: var(--space-md);
+}
+
+.postre-card {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  align-items: stretch;
+  padding: 0;
+  background-color: var(--gold-light);
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.postre-card:hover {
+  border-color: var(--gold);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(59, 15, 26, 0.12);
+}
+
+.postre-card .pizza-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  margin: 0;
+  border-radius: 0;
+}
+
+.postre-card-content {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+  height: 100%;
+}
+
+.postre-card .pizza-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.postre-card p {
+  font-size: 14px;
+  color: var(--wine-light);
+  line-height: 1.45;
+  margin-bottom: var(--space-sm);
+}
+
+.postre-card .card-cta-button {
+  margin-top: auto;
+  padding-top: var(--space-xs);
+  color: var(--wine);
+  font-weight: 700;
+}
+
+.postre-card .card-cta-button:hover {
+  color: var(--terracotta);
+}
+
+.menu-footer-cta {
+  text-align: center;
+  margin-top: var(--space-xl);
+}
+
+/* ==========================================================================
+   9. HOURS & FOOTER
+   ========================================================================== */
+.section-hours {
+  text-align: center;
+  background-color: var(--gold-light);
+}
+
+.section-hours h2 { color: var(--wine); }
+
+.hours-days {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 600;
+  color: var(--wine-light);
+  margin-bottom: var(--space-xs);
+}
+
+.hours-time {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--wine);
+  margin-bottom: var(--space-md);
+}
+
+.hours-note {
+  max-width: 40ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-md);
+}
+
+.footer {
+  padding: var(--space-lg) 0 calc(var(--space-lg) + 60px);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.footer address {
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+.footer-tiktok-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.25rem;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  transition: color 0.2s ease;
+}
+
+.footer-tiktok-link:hover {
+  color: var(--terracotta);
+}
+
+/* ==========================================================================
+   10. BUTTONS & FLOATING ACTION BUTTONS (CTAs)
+   ========================================================================== */
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.85rem 2.25rem;
+  background-color: var(--color-accent);
+  color: #FFFFFF;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  border-radius: var(--radius-pill);
+  border: 1.5px solid var(--color-accent);
+  transition: all 0.25s ease;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(193, 68, 45, 0.15);
+}
+
+.cta-button:hover {
+  background-color: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+  color: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(193, 68, 45, 0.25);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+.cta-button.secondary {
+  background-color: transparent;
+  color: var(--color-text);
+  border-color: var(--color-text);
+  box-shadow: none;
+}
+
+.cta-button.secondary:hover {
+  background-color: var(--color-text);
+  color: var(--color-surface);
+}
+
+.section-story .cta-button.secondary {
+  color: var(--gold-light);
+  border-color: var(--gold-light);
+}
+
+.section-story .cta-button.secondary:hover {
+  background-color: var(--gold-light);
+  color: var(--wine);
+  box-shadow: 0 6px 16px rgba(227, 198, 140, 0.2);
+}
+
+/* WhatsApp Floating Button */
+.whatsapp-float {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  background: #25D366;
+  color: #FFFFFF;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: var(--radius-pill);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-float svg {
+  width: 22px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* ==========================================================================
+   11. MEDIA QUERIES & RESPONSIVE DESIGN
+   ========================================================================== */
+@media (max-width: 768px) {
+  body {
+    font-size: 16px;
+  }
+
+  .nav-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: fixed;
+    top: 52px;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    background: rgba(250, 249, 247, 0.98);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom: 1px solid var(--color-border);
+    padding: var(--space-sm) 1.25rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .nav-links.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .nav-links li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .nav-links a {
+    display: block;
+    padding: 0.85rem 0;
+    font-size: 17px;
+  }
+
+  .hero {
+    min-height: auto;
+    padding-top: calc(52px + var(--space-lg));
+    padding-bottom: var(--space-lg);
+  }
+
+  .hero-lead {
+    max-width: none;
+  }
+
+  .story-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .specs {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .menu-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .postre-card {
+    grid-template-columns: 110px 1fr;
+  }
+
+  .postre-card .pizza-card-image {
+    width: 110px;
+  }
+
+  .whatsapp-float span {
+    display: none;
+  }
+
+  .whatsapp-float {
+    width: 56px;
+    height: 56px;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    bottom: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .whatsapp-float svg {
+    width: 26px;
+    height: 26px;
+  }
+}
+
+@media (max-width: 480px) {
+  .specs {
+    grid-template-columns: 1fr;
+  }
+
+  .postre-card {
+    grid-template-columns: 1fr;
+  }
+
+  .postre-card .pizza-card-image {
+    width: 100%;
+    height: 180px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-video {
+    display: none;
+  }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
