@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { PIZZAS, DESSERTS } from '@/data/menu';
+import { PIZZAS, PIZZAS_PREMIUM, DESSERTS } from '@/data/menu';
 
 export default function MenuSection() {
   return (
@@ -9,7 +9,7 @@ export default function MenuSection() {
         <h2>Nuestras especialidades</h2>
         <p className="section-context">Precio de introducción · Entrega en San Miguel Petapa</p>
 
-        {/* Pizzas */}
+        {/* 1. PIZZAS CLÁSICAS / ESPECIALIDADES */}
         <div className="menu-grid">
           {PIZZAS.map((pizza) => (
             <article key={pizza.id} className="pizza-card">
@@ -24,11 +24,24 @@ export default function MenuSection() {
                   />
                 </div>
               </div>
+
               <div className="pizza-card-top">
                 <h3>{pizza.name}</h3>
                 <span className="price">{pizza.price}</span>
               </div>
-              <p>{pizza.description}</p>
+
+              <p style={{ whiteSpace: 'pre-line' }}>
+                {pizza.id === 'la-culpable' ? (
+                  <>
+                    <strong>{pizza.description.split('\n')[0]}</strong>
+                    {'\n'}
+                    {pizza.description.split('\n').slice(1).join('\n')}
+                  </>
+                ) : (
+                  pizza.description
+                )}
+              </p>
+
               <a
                 href={`https://wa.me/50230883119?text=Hola%2C%20quiero%20pedir%20la%20pizza%20${encodeURIComponent(pizza.name)}`}
                 className="card-cta-button"
@@ -41,8 +54,60 @@ export default function MenuSection() {
           ))}
         </div>
 
-        {/* Postres */}
-        <h2 className="postre-label">Postres</h2>
+        {/* SECCIÓN PREMIUM CON DEGRADADO */}
+        <div className="premium-gradient-wrapper">
+          <div style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
+            <h2 style={{ color: '#CA3918', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              ★ Premium Pizzas
+            </h2>
+            <p className="section-context">Ingredientes de alta calidad e inspiraciones artesanales</p>
+
+            <div className="menu-grid">
+              {PIZZAS_PREMIUM.map((pizza) => (
+                <article key={pizza.id} className="pizza-card premium-card">
+                  <div className="pizza-card-gallery media-gallery">
+                    <div className="gallery-slide is-active" style={{ position: 'relative', width: '100%', height: '220px' }}>
+                      <Image
+                        src={pizza.image}
+                        alt={pizza.alt || pizza.name}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 33vw"
+                        style={{ objectFit: 'cover' }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="pizza-card-top">
+                    <h3>{pizza.name}</h3>
+                    <span className="price">Q{pizza.price}</span>
+                  </div>
+
+                  {pizza.description && (
+                    <p style={{ whiteSpace: 'pre-line' }}>{pizza.description}</p>
+                  )}
+
+                  <a
+                    href={`https://wa.me/50230883119?text=Hola%2C%20quiero%20pedir%20la%20pizza%20Premium%20${encodeURIComponent(pizza.name)}`}
+                    className="card-cta-button"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    Pedir esta pizza <span>→</span>
+                  </a>
+                </article>
+              ))}
+              <div className="burrata-disclaimer">
+
+              </div>
+              <p>
+                ✨ <strong>Eleva tu experiencia:</strong> Convierte cualquier pizza en una obra maestra añadiendo una <strong>Burrata cremosa y artesanal</strong> entera por solo <strong>+Q50</strong>.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. POSTRES */}
+        <h2 className="postre-label" style={{ marginTop: '3.5rem' }}>Postres</h2>
         <div className="menu-grid">
           {DESSERTS.map((dessert) => (
             <article key={dessert.id} className="postre-card">
@@ -75,6 +140,7 @@ export default function MenuSection() {
           ))}
         </div>
 
+        {/* FOOTER CTA */}
         <div className="menu-footer-cta">
           <a
             href="https://wa.me/50230883119?text=Hola%2C%20quiero%20hacer%20un%20pedido"

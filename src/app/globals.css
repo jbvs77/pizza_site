@@ -855,3 +855,26 @@ h3 {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* Transición fluida con degradado al llegar a Premium */
+.premium-gradient-wrapper {
+  margin-top: 3.5rem;
+  padding: 2.5rem 1.5rem;
+  border-radius: 1.5rem;
+  /* Transición de color oscuro normal al tono rojizo/dorado premium de CasiPizza */
+  background: linear-gradient(
+    180deg, 
+    transparent 0%, 
+    rgba(202, 57, 24, 0.15) 30%, 
+    rgba(202, 57, 24, 0.25) 70%, 
+    transparent 100%
+  );
+  border: 1px solid rgba(202, 57, 24, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Efecto elegante de brillo extra en tarjetas Premium */
+.premium-card {
+  border: 2px solid #CA3918 !important;
+  box-shadow: 0 6px 16px rgba(202, 57, 24, 0.2);
+}
