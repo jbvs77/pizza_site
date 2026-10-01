@@ -11,14 +11,14 @@ export default function StatusBadge() {
   useEffect(() => {
     const updateStatus = () => {
       const now = new Date();
-      const day = now.getDay(); // 0 = Dom, 5 = Vie, 6 = Sáb
+      const day = now.getDay();
       const hour = now.getHours();
       const minutes = now.getMinutes();
       const currentTime = hour + minutes / 60;
 
       const openDays = [4, 5, 6, 0];
-      const openHour = 17.0; // 5:00 PM
-      const closeHour = 22.5; // 10:30 PM
+      const openHour = 18.0;
+      const closeHour = 21;
 
       const isOpenDay = openDays.includes(day);
       const isOpenHours = currentTime >= openHour && currentTime < closeHour;
@@ -31,7 +31,7 @@ export default function StatusBadge() {
       } else {
         const text = (isOpenDay && currentTime < openHour)
           ? 'Horno Apagado • Abrimos hoy a las 5:00 PM'
-          : 'Horno Apagado • Abrimos el Viernes';
+          : 'Horno Apagado • Abrimos el Jueves';
 
         setStatus({ text, isClosed: true });
       }
@@ -43,9 +43,11 @@ export default function StatusBadge() {
   }, []);
 
   return (
-    <div className={`live-badge live-badge--sm ${status.isClosed ? 'is-closed' : ''}`}>
-      <span className="live-dot" />
-      <span className="live-text">{status.text}</span>
+    <div className="status-float-wrapper">
+      <div className={`live-badge live-badge--sm ${status.isClosed ? 'is-closed' : ''}`}>
+        <span className="live-dot" />
+        <span className="live-text">{status.text}</span>
+      </div>
     </div>
   );
 }

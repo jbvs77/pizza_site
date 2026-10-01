@@ -4,6 +4,7 @@ import StorySection from '@/components/StorySection';
 import MenuSection from '@/components/MenuSection';
 import HoursFooter from '@/components/HoursFooter';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
+import StatusBadge from '@/components/StatusBadge';
 
 export default function HomePage() {
   return (
@@ -16,6 +17,7 @@ export default function HomePage() {
       </main>
       <HoursFooter />
       <WhatsAppFloat />
+      <StatusBadge />
     </>
   );
 }

@@ -1,6 +1,12 @@
 import Image from 'next/image';
 import { PIZZAS, PIZZAS_PREMIUM, DESSERTS } from '@/data/menu';
 
+// Helper para formatear el precio de forma segura (acepta string o number)
+const formatPrice = (price: string | number) => {
+  const priceStr = String(price);
+  return priceStr.startsWith('Q') ? priceStr : `Q${priceStr}`;
+};
+
 export default function MenuSection() {
   return (
     <section id="menu" className="section section-menu">
@@ -17,7 +23,7 @@ export default function MenuSection() {
                 <div className="gallery-slide is-active" style={{ position: 'relative', width: '100%', height: '220px' }}>
                   <Image
                     src={pizza.image}
-                    alt={pizza.alt}
+                    alt={pizza.alt || pizza.name}
                     fill
                     sizes="(max-width: 768px) 100vw, 33vw"
                     style={{ objectFit: 'cover' }}
@@ -27,7 +33,7 @@ export default function MenuSection() {
 
               <div className="pizza-card-top">
                 <h3>{pizza.name}</h3>
-                <span className="price">{pizza.price}</span>
+                <span className="price">{formatPrice(pizza.price)}</span>
               </div>
 
               <p style={{ whiteSpace: 'pre-line' }}>
@@ -54,77 +60,72 @@ export default function MenuSection() {
           ))}
         </div>
 
-        {/* SECCIÓN PREMIUM CON DEGRADADO */}
+        {/* 2. SECCIÓN PREMIUM CON DEGRADADO */}
         <div className="premium-gradient-wrapper">
-          <div style={{ paddingTop: '2rem', paddingBottom: '2rem' }}>
-            <h2 style={{ color: '#CA3918', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-              ★ Premium Pizzas
-            </h2>
-            <p className="section-context">Ingredientes de alta calidad e inspiraciones artesanales</p>
+          <h2 style={{ color: 'var(--terracotta)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            ★ Premium Pizzas
+          </h2>
+          <p className="section-context">Ingredientes de alta calidad e inspiraciones artesanales</p>
 
-            <div className="menu-grid">
-              {PIZZAS_PREMIUM.map((pizza) => (
-                <article key={pizza.id} className="pizza-card premium-card">
-                  <div className="pizza-card-gallery media-gallery">
-                    <div className="gallery-slide is-active" style={{ position: 'relative', width: '100%', height: '220px' }}>
-                      <Image
-                        src={pizza.image}
-                        alt={pizza.alt || pizza.name}
-                        fill
-                        sizes="(max-width: 768px) 100vw, 33vw"
-                        style={{ objectFit: 'cover' }}
-                      />
-                    </div>
+          <div className="menu-grid" style={{ marginTop: '1.5rem' }}>
+            {PIZZAS_PREMIUM.map((pizza) => (
+              <article key={pizza.id} className="pizza-card premium-card">
+                <div className="pizza-card-gallery media-gallery">
+                  <div className="gallery-slide is-active" style={{ position: 'relative', width: '100%', height: '220px' }}>
+                    <Image
+                      src={pizza.image}
+                      alt={pizza.alt || pizza.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      style={{ objectFit: 'cover' }}
+                    />
                   </div>
+                </div>
 
-                  <div className="pizza-card-top">
-                    <h3>{pizza.name}</h3>
-                    <span className="price">Q{pizza.price}</span>
-                  </div>
+                <div className="pizza-card-top">
+                  <h3>{pizza.name}</h3>
+                  <span className="price">{formatPrice(pizza.price)}</span>
+                </div>
 
-                  {pizza.description && (
-                    <p style={{ whiteSpace: 'pre-line' }}>{pizza.description}</p>
-                  )}
+                {pizza.description && (
+                  <p style={{ whiteSpace: 'pre-line' }}>{pizza.description}</p>
+                )}
 
-                  <a
-                    href={`https://wa.me/50230883119?text=Hola%2C%20quiero%20pedir%20la%20pizza%20Premium%20${encodeURIComponent(pizza.name)}`}
-                    className="card-cta-button"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Pedir esta pizza <span>→</span>
-                  </a>
-                </article>
-              ))}
-              <div className="burrata-disclaimer">
+                <a
+                  href={`https://wa.me/50230883119?text=Hola%2C%20quiero%20pedir%20la%20pizza%20Premium%20${encodeURIComponent(pizza.name)}`}
+                  className="card-cta-button"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Pedir esta pizza <span>→</span>
+                </a>
+              </article>
+            ))}
+          </div>
 
-              </div>
-              <p>
-                ✨ <strong>Eleva tu experiencia:</strong> Convierte cualquier pizza en una obra maestra añadiendo una <strong>Burrata cremosa y artesanal</strong> entera por solo <strong>+Q50</strong>.
-              </p>
-            </div>
+          <div className="burrata-banner">
+            ✨ <strong>Eleva tu experiencia:</strong> Convierte cualquier pizza en una obra maestra añadiendo una <strong>Burrata cremosa y artesanal</strong> entera por solo <strong>+Q50</strong>.
           </div>
         </div>
 
         {/* 3. POSTRES */}
         <h2 className="postre-label" style={{ marginTop: '3.5rem' }}>Postres</h2>
-        <div className="menu-grid">
+        <div className="menu-grid postres-grid">
           {DESSERTS.map((dessert) => (
             <article key={dessert.id} className="postre-card">
-              <div style={{ position: 'relative', width: '100%', height: '200px' }}>
+              <div className="postre-image-wrapper">
                 <Image
                   src={dessert.image}
-                  alt={dessert.alt}
+                  alt={dessert.alt || dessert.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="pizza-card-image"
                   style={{ objectFit: 'cover' }}
                 />
               </div>
               <div className="postre-card-content">
                 <div className="pizza-card-top">
                   <h3>{dessert.name}</h3>
-                  <span className="price">{dessert.price}</span>
+                  <span className="price">{formatPrice(dessert.price)}</span>
                 </div>
                 <p>{dessert.description}</p>
                 <a
