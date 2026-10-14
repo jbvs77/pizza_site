@@ -28,6 +28,7 @@
   --max-width: 980px;
   --radius: 12px;
   --radius-pill: 980px;
+  --header-height: 56px;
 }
 
 /* ==========================================================================
@@ -41,6 +42,7 @@
 
 html {
   scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -131,29 +133,27 @@ h3 {
   font-weight: 400;
   line-height: 1.4;
   color: rgba(255, 255, 255, 0.92);
-  margin: var(--space-md) 0 var(--space-sm);
+  margin-block: var(--space-md) var(--space-sm);
   max-width: 34ch;
 }
 
 /* ==========================================================================
-   4. NAVIGATION HEADER (Dynamic Opacity + Glassmorphism)
+   4. NAVIGATION HEADER (Glassmorphism)
    ========================================================================== */
 .header {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  inset-block-start: 0;
+  inset-inline: 0;
   z-index: 100;
   border-bottom: 1px solid rgba(59, 15, 26, 0.05);
   transition: background-color 0.2s linear, backdrop-filter 0.2s linear, box-shadow 0.2s linear;
 }
 
-/* Estado cuando el usuario hace scroll hacia abajo */
 .header.is-scrolled {
-  background: rgba(250, 249, 247, 0.88); /* Más opaco */
+  background: rgba(250, 249, 247, 0.88);
   backdrop-filter: blur(16px) saturate(180%);
   -webkit-backdrop-filter: blur(16px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.6);
+  border-bottom-color: rgba(255, 255, 255, 0.6);
   box-shadow: 
     0 10px 30px -10px rgba(59, 15, 26, 0.08),
     0 1px 0 0 rgba(255, 255, 255, 0.8) inset;
@@ -163,7 +163,7 @@ h3 {
   position: relative;
   width: min(100% - 2.5rem, var(--max-width));
   margin-inline: auto;
-  height: 56px;
+  height: var(--header-height);
   display: flex;
   align-items: center;
 }
@@ -184,12 +184,12 @@ h3 {
 
 .nav-left {
   justify-content: flex-end;
-  padding-right: 3rem;
+  padding-inline-end: 3rem;
 }
 
 .nav-right {
   justify-content: flex-start;
-  padding-left: 3rem;
+  padding-inline-start: 3rem;
 }
 
 .nav-group a {
@@ -222,121 +222,17 @@ h3 {
 }
 
 .nav-toggle {
+  display: none;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
   color: var(--nav-text-color, var(--wine));
   transition: color 0.3s ease;
 }
 
 .nav-mobile-menu {
   display: none;
-}
-
-/* 4.1 HEADER RESPONSIVE (Pizza Toggle + Drawer 3D) */
-@media (max-width: 860px) {
-  .nav {
-    height: 56px;
-  }
-
-  .nav-group {
-    display: none;
-  }
-
-  .nav-container {
-    justify-content: center;
-  }
-
-  .logo {
-    font-size: 1.6rem;
-  }
-
-  .nav-toggle {
-    display: flex;
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 36px;
-    height: 36px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--wine);
-    align-items: center;
-    justify-content: center;
-    z-index: 110;
-  }
-
-  .nav-toggle svg {
-    position: absolute;
-    width: 26px;
-    height: 26px;
-    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
-  }
-
-  .nav-toggle .icon-closed {
-    opacity: 1;
-    transform: rotate(0) scale(1);
-  }
-
-  .nav-toggle .icon-open {
-    opacity: 0;
-    transform: rotate(-90deg) scale(0.5);
-  }
-
-  .nav-toggle[aria-expanded="true"] .icon-closed {
-    opacity: 0;
-    transform: rotate(90deg) scale(0.5);
-  }
-
-  .nav-toggle[aria-expanded="true"] .icon-open {
-    opacity: 1;
-    transform: rotate(0) scale(1);
-  }
-
-  .nav-mobile-menu {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    top: 56px;
-    left: 0;
-    right: 0;
-    background: rgba(250, 249, 247, 0.75);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 
-      0 20px 40px -15px rgba(59, 15, 26, 0.15),
-      0 1px 0 0 rgba(255, 255, 255, 0.9) inset;
-    padding: var(--space-md) 1.5rem;
-    transform: translateY(-120%);
-    opacity: 0;
-    pointer-events: none;
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
-  }
-
-  .nav-mobile-menu.is-open {
-    transform: translateY(0);
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .mobile-links {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .mobile-links li {
-    border-bottom: 1px solid var(--color-border);
-  }
-
-  .mobile-links a {
-    display: block;
-    padding: 0.9rem 0;
-    font-size: 15px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--color-text);
-  }
 }
 
 /* ==========================================================================
@@ -412,21 +308,6 @@ h3 {
   display: none;
 }
 
-@media (max-width: 768px) {
-  .status-float-wrapper {
-    bottom: 1.25rem;
-    left: 45%; 
-    max-width: calc(100vw - 100px);
-  }
-
-  .status-float-wrapper .live-text {
-    font-size: 10px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-}
-
 /* ==========================================================================
    6. HERO SECTION
    ========================================================================== */
@@ -458,7 +339,7 @@ h3 {
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: calc(52px + var(--space-xl)) var(--space-sm) var(--space-xl);
+  padding: calc(var(--header-height) + var(--space-xl)) var(--space-sm) var(--space-xl);
   width: min(100% - 2.5rem, var(--max-width));
   margin-inline: auto;
 }
@@ -494,7 +375,9 @@ h3 {
    7. SECTIONS COMMON & STORY SECTION
    ========================================================================== */
 .section {
-  padding: var(--space-xl) 0;
+  padding-block: var(--space-xl);
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 500px;
 }
 
 .section-story {
@@ -565,7 +448,7 @@ h3 {
 }
 
 /* ==========================================================================
-   8. MENU SECTION & PREMIUM CARDS
+   8. MENU SECTION & CARDS
    ========================================================================== */
 .section-menu {
   background-color: var(--color-surface);
@@ -668,44 +551,286 @@ h3 {
   color: var(--color-accent-hover);
 }
 
-/* Sección Premium con Degradado */
-.premium-gradient-wrapper {
-  margin-top: 3.5rem;
-  padding: 2.5rem 1.75rem;
-  border-radius: var(--radius);
+/* ==========================================================================
+   8.1 PREMIUM IMMERSIVE SECTION
+   ========================================================================== */
+.section-premium-immersive {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-block: 2rem;
+  padding-block: var(--space-xl);
   background: linear-gradient(
-    180deg, 
-    rgba(59, 15, 26, 0.03) 0%, 
-    rgba(193, 68, 45, 0.08) 50%, 
-    rgba(59, 15, 26, 0.03) 100%
+    180deg,
+    var(--color-bg) 0%,
+    var(--wine) 18%,
+    var(--wine) 82%,
+    var(--color-bg) 100%
   );
-  border: 1px solid rgba(193, 68, 45, 0.2);
+  color: #FFFFFF;
 }
 
-.premium-card {
-  border: 1.5px solid var(--terracotta);
-  box-shadow: 0 6px 18px rgba(193, 68, 45, 0.12);
+.premium-header-content {
+  text-align: center;
+  margin-bottom: var(--space-lg);
 }
 
-.burrata-banner {
-  margin-top: var(--space-md);
-  padding: 1rem 1.25rem;
-  background-color: var(--color-surface);
-  border: 1px dashed var(--gold);
+.premium-header-content h2 {
+  color: #FFFFFF;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+}
+
+.premium-subtitle {
+  font-size: 16px;
+  color: var(--gold-light);
+  margin-top: 0.25rem;
+}
+
+.pizza-card-dark {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-md);
+  background: rgba(30, 8, 13, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius);
-  color: var(--wine);
+  border: 1px solid rgba(227, 198, 140, 0.25);
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s ease, 
+              box-shadow 0.35s ease,
+              background-color 0.35s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+.pizza-card-dark::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.25),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.pizza-card-dark:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--gold-light);
+  background: rgba(45, 12, 20, 0.85);
+  box-shadow: 
+    0 16px 36px rgba(0, 0, 0, 0.5),
+    0 0 25px rgba(227, 198, 140, 0.3);
+}
+
+.pizza-card-dark:hover::before {
+  left: 150%;
+}
+
+.pizza-card-dark h3 {
+  color: #FFFFFF;
+}
+
+.price-gold {
+  color: var(--gold-light) !important;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.description-light {
+  color: rgba(255, 255, 255, 0.9) !important;
   font-size: 15px;
   line-height: 1.5;
-  text-align: center;
 }
 
-.burrata-banner strong {
-  color: var(--terracotta);
+.cta-gold {
+  color: var(--gold-light) !important;
+}
+
+.pizza-card-dark:hover .cta-gold {
+  color: #FFFFFF !important;
 }
 
 /* ==========================================================================
-   8.1 POSTRES CARD
+   BURRATA BANNER (Dark Luxury & Clean Options)
    ========================================================================== */
+.burrata-banner-dark {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.85rem;
+  margin-top: var(--space-lg);
+  padding: 1.75rem 1.5rem 1.5rem;
+  background: linear-gradient(135deg, rgba(184, 137, 46, 0.15) 0%, rgba(59, 15, 26, 0.6) 100%);
+  border: 1.5px dashed var(--gold-light);
+  border-radius: var(--radius);
+  color: #FFFFFF;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+}
+
+.burrata-banner-dark::before,
+.burrata-banner-clean::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.3),
+    transparent
+  );
+  transform: skewX(-25deg);
+  transition: left 0.75s ease;
+  pointer-events: none;
+}
+
+.burrata-banner-dark:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-style: solid;
+  border-color: var(--gold-light);
+  background: rgba(184, 137, 46, 0.25);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4), 0 0 25px rgba(227, 198, 140, 0.3);
+}
+
+.burrata-banner-dark:hover::before,
+.burrata-banner-clean:hover::before {
+  left: 150%;
+}
+
+.burrata-badge-gold {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.3rem 0.85rem;
+  background-color: var(--gold);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+}
+
+.burrata-content-dark {
+  font-size: 16px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.highlight-gold {
+  color: var(--gold-light);
+}
+
+.burrata-cta-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--gold-light);
+  transition: transform 0.2s ease;
+}
+
+.burrata-banner-dark:hover .burrata-cta-gold {
+  transform: translateX(4px);
+  color: #FFFFFF;
+}
+
+.burrata-banner-clean {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  margin-top: var(--space-lg);
+  padding: 1.5rem 1.5rem 1.25rem;
+  background: linear-gradient(135deg, #FFFDF8 0%, #FFF9EC 100%);
+  border: 1.5px dashed var(--gold);
+  border-radius: var(--radius);
+  color: var(--wine);
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(184, 137, 46, 0.08);
+}
+
+.burrata-banner-clean:hover {
+  transform: translateY(-3px) scale(1.01);
+  border-style: solid;
+  border-color: var(--gold);
+  background: #FFFFFF;
+  box-shadow: 
+    0 12px 30px -5px rgba(184, 137, 46, 0.25),
+    0 0 20px 2px rgba(227, 198, 140, 0.4);
+}
+
+.burrata-badge-clean {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--gold);
+  color: #FFFFFF;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: var(--radius-pill);
+}
+
+.burrata-content-clean {
+  font-size: 15px;
+  line-height: 1.5;
+  color: var(--wine);
+}
+
+.burrata-content-clean strong {
+  color: var(--terracotta);
+}
+
+.burrata-cta-clean {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--gold);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.burrata-banner-clean:hover .burrata-cta-clean {
+  color: var(--terracotta);
+  transform: translateX(3px);
+}
+
+/* 8.2 POSTRES SECTION */
 .postres-section {
   margin-top: 3.5rem;
 }
@@ -840,7 +965,7 @@ h3 {
   letter-spacing: -0.01em;
   border-radius: var(--radius-pill);
   border: 1.5px solid var(--color-accent);
-  transition: all 0.25s ease;
+  transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
   cursor: pointer;
   text-align: center;
   box-shadow: 0 2px 8px rgba(193, 68, 45, 0.15);
@@ -881,7 +1006,6 @@ h3 {
   box-shadow: 0 6px 16px rgba(227, 198, 140, 0.2);
 }
 
-/* WhatsApp Floating Button */
 .whatsapp-float {
   position: fixed;
   bottom: 1.5rem;
@@ -912,16 +1036,129 @@ h3 {
 }
 
 /* ==========================================================================
-   11. MEDIA QUERIES
+   11. MEDIA QUERIES & ACCESSIBILITY
    ========================================================================== */
+@media (max-width: 860px) {
+  .nav-group {
+    display: none;
+  }
+
+  .nav-container {
+    justify-content: center;
+  }
+
+  .logo {
+    font-size: 1.6rem;
+  }
+
+  .nav-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    inset-inline-start: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 36px;
+    height: 36px;
+    z-index: 110;
+  }
+
+  .nav-toggle svg {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+  }
+
+  .nav-toggle .icon-closed {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+
+  .nav-toggle .icon-open {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+
+  .nav-toggle[aria-expanded="true"] .icon-closed {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+  }
+
+  .nav-toggle[aria-expanded="true"] .icon-open {
+    opacity: 1;
+    transform: rotate(0) scale(1);
+  }
+
+  .nav-mobile-menu {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    top: var(--header-height);
+    inset-inline: 0;
+    background: rgba(250, 249, 247, 0.85);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: 
+      0 20px 40px -15px rgba(59, 15, 26, 0.15),
+      0 1px 0 0 rgba(255, 255, 255, 0.9) inset;
+    padding: var(--space-md) 1.5rem;
+    transform: translateY(-120%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+    will-change: transform, opacity;
+  }
+
+  .nav-mobile-menu.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-links {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .mobile-links li {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-links a {
+    display: block;
+    padding-block: 0.9rem;
+    font-size: 15px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text);
+  }
+}
+
 @media (max-width: 768px) {
   body {
     font-size: 16px;
   }
 
+  .status-float-wrapper {
+    bottom: 1.25rem;
+    left: 45%; 
+    max-width: calc(100vw - 100px);
+  }
+
+  .status-float-wrapper .live-text {
+    font-size: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .hero {
     min-height: auto;
-    padding-top: calc(56px + var(--space-lg));
+    padding-top: calc(var(--header-height) + var(--space-lg));
     padding-bottom: var(--space-lg);
   }
 
@@ -982,7 +1219,8 @@ h3 {
 
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
-

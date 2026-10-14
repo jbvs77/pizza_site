@@ -25,7 +25,12 @@ export default function Header() {
   const bgOpacity = 0.15 + scrollProgress * (0.95 - 0.15);
   const blurAmount = 6 + scrollProgress * (20 - 6);
 
-  // Pasamos un indicador de 0 a 1 al CSS mediante variables personalizadas
+  // Cálculos dinámicos para el borde e sombra
+  const borderOpacity = 0.05 + scrollProgress * 0.12;
+  const shadowY = 10 * scrollProgress;
+  const shadowBlur = 30 * scrollProgress;
+  const shadowOpacity = 0.08 * scrollProgress;
+
   return (
     <header
       className="header"
@@ -33,8 +38,8 @@ export default function Header() {
         backgroundColor: `rgba(250, 249, 247, ${bgOpacity})`,
         backdropFilter: `blur(${blurAmount}px) saturate(180%)`,
         WebkitBackdropFilter: `blur(${blurAmount}px) saturate(180%)`,
-        borderBottomColor: `rgba(59, 15, 26, ${0.05 + scrollProgress * 0.12})`,
-        boxShadow: `0 ${10 * scrollProgress}px ${30 * scrollProgress}px -10px rgba(59, 15, 26, ${0.08 * scrollProgress})`,
+        borderBottomColor: `rgba(59, 15, 26, ${borderOpacity})`,
+        boxShadow: `0 ${shadowY}px ${shadowBlur}px -10px rgba(59, 15, 26, ${shadowOpacity})`,
         // Cambia suavemente entre blanco (#FFFFFF) arriba y Vino (#3B0F1A) conforme hace scroll
         '--nav-text-color': scrollProgress > 0.3 ? 'var(--wine)' : '#FFFFFF',
       } as React.CSSProperties}
@@ -74,7 +79,6 @@ export default function Header() {
               </a>
             </li>
           </ul>
-
         </div>
 
         {/* Botón Mobile */}

@@ -1,125 +1,164 @@
 import Image from 'next/image';
 import { PIZZAS, PIZZAS_PREMIUM, DESSERTS } from '@/data/menu';
 
-// Helper para formatear el precio de forma segura (acepta string o number)
-const formatPrice = (price: string | number) => {
+const PHONE_NUMBER = '50230883119';
+
+// Helpers
+const formatPrice = (price: string | number): string => {
   const priceStr = String(price);
   return priceStr.startsWith('Q') ? priceStr : `Q${priceStr}`;
 };
 
+const getWhatsAppLink = (message: string): string =>
+  `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(message)}`;
+
+// Interfaz flexible para items del menú
+interface MenuItem {
+  id: string;
+  name: string;
+  price: string | number;
+  image: string;
+  alt?: string;
+  description?: string;
+}
+
+// Subcomponente reutilizable para tarjetas del menú
+function MenuItemCard({
+  item,
+  isPremium = false,
+  ctaText,
+  waPrefix,
+}: {
+  item: MenuItem;
+  isPremium?: boolean;
+  ctaText: string;
+  waPrefix: string;
+}) {
+  const cardClass = isPremium ? 'pizza-card-dark' : 'pizza-card';
+  const priceClass = isPremium ? 'price price-gold' : 'price';
+  const ctaClass = isPremium ? 'card-cta-button cta-gold' : 'card-cta-button';
+  const waMessage = `${waPrefix} ${item.name}`;
+
+  return (
+    <article className={cardClass}>
+      <div className="pizza-card-gallery media-gallery">
+        <div className="gallery-slide is-active relative w-full h-[220px]">
+          <Image
+            src={item.image}
+            alt={item.alt || item.name}
+            fill
+            sizes="(max-width: 768px) 100vw, 33vw"
+            className="object-cover"
+          />
+        </div>
+      </div>
+
+      <div className="pizza-card-top">
+        <h3>{item.name}</h3>
+        <span className={priceClass}>{formatPrice(item.price)}</span>
+      </div>
+
+      {item.description && (
+        <p className={isPremium ? 'description-light whitespace-pre-line' : 'whitespace-pre-line'}>
+          {item.id === 'la-culpable' ? (
+            <>
+              <strong>{item.description.split('\n')[0]}</strong>
+              {'\n'}
+              {item.description.split('\n').slice(1).join('\n')}
+            </>
+          ) : (
+            item.description
+          )}
+        </p>
+      )}
+
+      <a
+        href={getWhatsAppLink(waMessage)}
+        className={ctaClass}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {ctaText} <span>→</span>
+      </a>
+    </article>
+  );
+}
+
 export default function MenuSection() {
   return (
     <section id="menu" className="section section-menu">
+      {/* 1. PIZZAS CLÁSICAS */}
       <div className="container">
         <p className="label">Menú</p>
         <h2>Nuestras especialidades</h2>
         <p className="section-context">Precio de introducción · Entrega en San Miguel Petapa</p>
 
-        {/* 1. PIZZAS CLÁSICAS / ESPECIALIDADES */}
         <div className="menu-grid">
           {PIZZAS.map((pizza) => (
-            <article key={pizza.id} className="pizza-card">
-              <div className="pizza-card-gallery media-gallery">
-                <div className="gallery-slide is-active" style={{ position: 'relative', width: '100%', height: '220px' }}>
-                  <Image
-                    src={pizza.image}
-                    alt={pizza.alt || pizza.name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, 33vw"
-                    style={{ objectFit: 'cover' }}
-                  />
-                </div>
-              </div>
-
-              <div className="pizza-card-top">
-                <h3>{pizza.name}</h3>
-                <span className="price">{formatPrice(pizza.price)}</span>
-              </div>
-
-              <p style={{ whiteSpace: 'pre-line' }}>
-                {pizza.id === 'la-culpable' ? (
-                  <>
-                    <strong>{pizza.description.split('\n')[0]}</strong>
-                    {'\n'}
-                    {pizza.description.split('\n').slice(1).join('\n')}
-                  </>
-                ) : (
-                  pizza.description
-                )}
-              </p>
-
-              <a
-                href={`https://wa.me/50230883119?text=Hola%2C%20quiero%20pedir%20la%20pizza%20${encodeURIComponent(pizza.name)}`}
-                className="card-cta-button"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                Pedir esta pizza <span>→</span>
-              </a>
-            </article>
+            <MenuItemCard
+              key={pizza.id}
+              item={pizza}
+              ctaText="Pedir esta pizza"
+              waPrefix="Hola, quiero pedir la pizza"
+            />
           ))}
         </div>
+      </div>
 
-        {/* 2. SECCIÓN PREMIUM CON DEGRADADO */}
-        <div className="premium-gradient-wrapper">
-          <h2 style={{ color: 'var(--terracotta)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            ★ Premium Pizzas
-          </h2>
-          <p className="section-context">Ingredientes de alta calidad e inspiraciones artesanales</p>
+      {/* 2. PIZZAS PREMIUM */}
+      <div className="section-premium-immersive">
+        <div className="container">
+          <div className="premium-header-content">
+            <span className="label label-light">Edición Exclusiva</span>
+            <h2>★ Premium Pizzas</h2>
+            <p className="premium-subtitle">
+              Ingredientes de alta calidad e inspiraciones artesanales
+            </p>
+          </div>
 
-          <div className="menu-grid" style={{ marginTop: '1.5rem' }}>
+          <div className="menu-grid">
             {PIZZAS_PREMIUM.map((pizza) => (
-              <article key={pizza.id} className="pizza-card premium-card">
-                <div className="pizza-card-gallery media-gallery">
-                  <div className="gallery-slide is-active" style={{ position: 'relative', width: '100%', height: '220px' }}>
-                    <Image
-                      src={pizza.image}
-                      alt={pizza.alt || pizza.name}
-                      fill
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                      style={{ objectFit: 'cover' }}
-                    />
-                  </div>
-                </div>
-
-                <div className="pizza-card-top">
-                  <h3>{pizza.name}</h3>
-                  <span className="price">{formatPrice(pizza.price)}</span>
-                </div>
-
-                {pizza.description && (
-                  <p style={{ whiteSpace: 'pre-line' }}>{pizza.description}</p>
-                )}
-
-                <a
-                  href={`https://wa.me/50230883119?text=Hola%2C%20quiero%20pedir%20la%20pizza%20Premium%20${encodeURIComponent(pizza.name)}`}
-                  className="card-cta-button"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Pedir esta pizza <span>→</span>
-                </a>
-              </article>
+              <MenuItemCard
+                key={pizza.id}
+                item={pizza}
+                isPremium
+                ctaText="Pedir esta pizza"
+                waPrefix="Hola, quiero pedir la pizza Premium"
+              />
             ))}
           </div>
 
-          <div className="burrata-banner">
-            ✨ <strong>Eleva tu experiencia:</strong> Convierte cualquier pizza en una obra maestra añadiendo una <strong>Burrata cremosa y artesanal</strong> entera por solo <strong>+Q50</strong>.
-          </div>
+          {/* BANNER BURRATA DARK */}
+          <a
+            href={getWhatsAppLink('Hola, quiero agregar una Burrata artesanal a mi pedido (+Q50)')}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="burrata-banner-dark"
+          >
+            <span className="burrata-badge-gold">✨ Recomendación del Chef</span>
+            <div className="burrata-content-dark">
+              <strong>Eleva tu experiencia:</strong> Convierte cualquier pizza en una obra maestra añadiendo una <strong>Burrata cremosa y artesanal</strong> entera por solo <strong className="highlight-gold">+Q50</strong>.
+            </div>
+            <span className="burrata-cta-gold">
+              Agregar Burrata a mi pedido <span>→</span>
+            </span>
+          </a>
         </div>
+      </div>
 
-        {/* 3. POSTRES */}
-        <h2 className="postre-label" style={{ marginTop: '3.5rem' }}>Postres</h2>
+      {/* 3. POSTRES Y FOOTER */}
+      <div className="container">
+        <h2 className="postre-label mt-[3.5rem]">Postres</h2>
         <div className="menu-grid postres-grid">
           {DESSERTS.map((dessert) => (
             <article key={dessert.id} className="postre-card">
-              <div className="postre-image-wrapper">
+              <div className="postre-image-wrapper relative">
                 <Image
                   src={dessert.image}
                   alt={dessert.alt || dessert.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  style={{ objectFit: 'cover' }}
+                  className="object-cover"
                 />
               </div>
               <div className="postre-card-content">
@@ -129,7 +168,7 @@ export default function MenuSection() {
                 </div>
                 <p>{dessert.description}</p>
                 <a
-                  href={`https://wa.me/50230883119?text=Hola%2C%20quiero%20agregar%20un%20${encodeURIComponent(dessert.name)}%20a%20mi%20pedido`}
+                  href={getWhatsAppLink(`Hola, quiero agregar un ${dessert.name} a mi pedido`)}
                   className="card-cta-button"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -144,7 +183,7 @@ export default function MenuSection() {
         {/* FOOTER CTA */}
         <div className="menu-footer-cta">
           <a
-            href="https://wa.me/50230883119?text=Hola%2C%20quiero%20hacer%20un%20pedido"
+            href={getWhatsAppLink('Hola, quiero hacer un pedido')}
             className="cta-button"
             target="_blank"
             rel="noopener noreferrer"
