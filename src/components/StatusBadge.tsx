@@ -4,21 +4,21 @@ import { useState, useEffect } from 'react';
 
 export default function StatusBadge() {
   const [status, setStatus] = useState({
-    text: 'Horno Apagado • Abrimos el Viernes',
+    text: 'Cargando estado...',
     isClosed: true,
   });
 
   useEffect(() => {
     const updateStatus = () => {
       const now = new Date();
-      const day = now.getDay();
+      const day = now.getDay(); // 0: Domingo, 1: Lunes, 2: Martes, 3: Miércoles, 4: Jueves, 5: Viernes, 6: Sábado
       const hour = now.getHours();
       const minutes = now.getMinutes();
       const currentTime = hour + minutes / 60;
 
-      const openDays = [4, 5, 6, 0];
-      const openHour = 18.0;
-      const closeHour = 21;
+      const openDays = [5, 6, 0]; // Viernes, Sábado, Domingo
+      const openHour = 18.0; // 6:00 PM (18:00)
+      const closeHour = 22.0; // 10:00 PM (22:00)
 
       const isOpenDay = openDays.includes(day);
       const isOpenHours = currentTime >= openHour && currentTime < closeHour;
@@ -28,17 +28,30 @@ export default function StatusBadge() {
           text: 'Masa leudando • Horno Encendido',
           isClosed: false,
         });
+      } else if (isOpenDay && currentTime < openHour) {
+        setStatus({
+          text: 'Horno Apagado • Abrimos hoy a las 6:00 PM',
+          isClosed: true,
+        });
       } else {
-        const text = (isOpenDay && currentTime < openHour)
-          ? 'Horno Apagado • Abrimos hoy a las 5:00 PM'
-          : 'Horno Apagado • Abrimos el Jueves';
+        // Determinamos dinámicamente qué mensaje de próximo día mostrar
+        let nextDayText = 'Abrimos el Viernes';
+        
+        if (day === 5 && currentTime >= closeHour) {
+          nextDayText = 'Abrimos mañana (Sábado)';
+        } else if (day === 6 && currentTime >= closeHour) {
+          nextDayText = 'Abrimos mañana (Domingo)';
+        }
 
-        setStatus({ text, isClosed: true });
+        setStatus({
+          text: `Horno Apagado • ${nextDayText}`,
+          isClosed: true,
+        });
       }
     };
 
     updateStatus();
-    const interval = setInterval(updateStatus, 60000);
+    const interval = setInterval(updateStatus, 60000); // Evalúa cada 60 segundos
     return () => clearInterval(interval);
   }, []);
 

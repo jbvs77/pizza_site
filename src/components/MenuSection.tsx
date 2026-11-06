@@ -20,6 +20,7 @@ interface MenuItem {
   image: string;
   alt?: string;
   description?: string;
+  objectPosition?: string; // Opcional para encuadres específicos por foto
 }
 
 // Subcomponente reutilizable para tarjetas del menú
@@ -48,7 +49,7 @@ function MenuItemCard({
             alt={item.alt || item.name}
             fill
             sizes="(max-width: 768px) 100vw, 33vw"
-            className="object-cover"
+            className={`object-cover ${item.objectPosition || 'object-center'}`}
           />
         </div>
       </div>
@@ -158,7 +159,7 @@ export default function MenuSection() {
                   alt={dessert.alt || dessert.name}
                   fill
                   sizes="(max-width: 768px) 100vw, 33vw"
-                  className="object-cover"
+                  className="object-cover object-center"
                 />
               </div>
               <div className="postre-card-content">
