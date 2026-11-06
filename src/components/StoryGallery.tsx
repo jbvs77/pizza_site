@@ -6,9 +6,7 @@ const VIDEOS = [
   { id: 1, src: '/videos/hero-video-1.mp4' },
   { id: 2, src: '/videos/hero-video-2.mp4' },  
   { id: 3, src: '/videos/hero-video-3.mp4' },
-  { id: 4, src: '/videos/hero-video-4.mp4' },
-  { id: 5, src: '/videos/hero-video-5.mp4' },
-  { id: 6, src: '/videos/hero-video-6.mp4' },
+  { id: 4, src: '/videos/hero-video-4.mp4' }  
 ];
 
 export default function StoryGallery() {
