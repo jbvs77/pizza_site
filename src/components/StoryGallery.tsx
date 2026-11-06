@@ -5,16 +5,17 @@ import { useState, useEffect, useRef } from 'react';
 const VIDEOS = [
   { id: 1, src: '/videos/hero-video-1.mp4' },
   { id: 2, src: '/videos/hero-video-2.mp4' },  
-  { id: 3, src: '/videos/IMG_2048_mini.mp4' },
+  { id: 3, src: '/videos/hero-video-3.mp4' },
   { id: 4, src: '/videos/hero-video-4.mp4' },
-  
+  { id: 5, src: '/videos/hero-video-5.mp4' },
+  { id: 6, src: '/videos/hero-video-6.mp4' },
 ];
 
 export default function StoryGallery() {
   const [current, setCurrent] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  // Cambia de slide exactamente cada 3 segundos (3000 ms)
+  // Cambia de slide cada 3 segundos exactos
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % VIDEOS.length);
@@ -22,7 +23,7 @@ export default function StoryGallery() {
     return () => clearInterval(timer);
   }, []);
 
-  // Controla la reproducción desde el inicio (segundo 0) a velocidad normal
+  // Controla la reproducción desde el segundo 0 a velocidad normal
   useEffect(() => {
     videoRefs.current.forEach((video, idx) => {
       if (!video) return;
@@ -45,8 +46,10 @@ export default function StoryGallery() {
         >
           <video
             ref={(el) => { videoRefs.current[idx] = el; }}
+            autoPlay
             muted
             playsInline
+            loop
             preload="auto"
           >
             <source src={vid.src} type="video/mp4" />
